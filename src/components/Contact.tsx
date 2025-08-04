@@ -4,8 +4,40 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "@/hooks/use-toast";
+
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
+  message: string;
+};
 
 const Contact = () => {
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>();
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      
+      reset();
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-6">
@@ -27,40 +59,87 @@ const Contact = () => {
                 Fill out the form below and we'll get back to you within 24 hours.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" placeholder="John" className="mt-2" />
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input 
+                      id="firstName" 
+                      placeholder="John" 
+                      className="mt-2" 
+                      {...register("firstName", { required: "First name is required" })}
+                    />
+                    {errors.firstName && (
+                      <p className="text-sm text-destructive mt-1">{errors.firstName.message}</p>
+                    )}
+                  </div>
+                  <div>
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input 
+                      id="lastName" 
+                      placeholder="Doe" 
+                      className="mt-2" 
+                      {...register("lastName", { required: "Last name is required" })}
+                    />
+                    {errors.lastName && (
+                      <p className="text-sm text-destructive mt-1">{errors.lastName.message}</p>
+                    )}
+                  </div>
                 </div>
+                
                 <div>
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" placeholder="Doe" className="mt-2" />
+                  <Label htmlFor="email">Email</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="john@company.com" 
+                    className="mt-2" 
+                    {...register("email", { 
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address"
+                      }
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                  )}
                 </div>
-              </div>
-              
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="john@company.com" className="mt-2" />
-              </div>
-              
-              <div>
-                <Label htmlFor="company">Company</Label>
-                <Input id="company" placeholder="Your Company Name" className="mt-2" />
-              </div>
-              
-              <div>
-                <Label htmlFor="message">Message</Label>
-                <Textarea 
-                  id="message" 
-                  placeholder="Tell us about your business and how we can help with AI implementation..."
-                  className="mt-2 min-h-[120px]"
-                />
-              </div>
-              
-              <Button variant="neural" className="w-full">
-                Send Message
-              </Button>
+                
+                <div>
+                  <Label htmlFor="company">Company</Label>
+                  <Input 
+                    id="company" 
+                    placeholder="Your Company Name" 
+                    className="mt-2" 
+                    {...register("company")}
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="Tell us about your business and how we can help with AI implementation..."
+                    className="mt-2 min-h-[120px]"
+                    {...register("message", { required: "Message is required" })}
+                  />
+                  {errors.message && (
+                    <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
+                  )}
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  variant="neural" 
+                  className="w-full" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
             </CardContent>
           </Card>
           
