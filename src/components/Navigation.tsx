@@ -52,7 +52,11 @@ const Navigation = () => {
           </div>
           
           {/* CTA Button */}
-          <Button variant="neural" size="sm">
+          <Button 
+            variant="neural" 
+            size="sm"
+            onClick={() => scrollToSection('contact')}
+          >
             Free Consultation
           </Button>
         </div>

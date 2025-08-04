@@ -36,11 +36,51 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="hover:text-primary transition-colors cursor-pointer">AI Agent Development</li>
-              <li className="hover:text-primary transition-colors cursor-pointer">Strategy Consulting</li>
-              <li className="hover:text-primary transition-colors cursor-pointer">Process Automation</li>
-              <li className="hover:text-primary transition-colors cursor-pointer">Predictive Analytics</li>
-              <li className="hover:text-primary transition-colors cursor-pointer">Team Training</li>
+              <li 
+                className="hover:text-primary transition-colors cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                AI Agent Development
+              </li>
+              <li 
+                className="hover:text-primary transition-colors cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Strategy Consulting
+              </li>
+              <li 
+                className="hover:text-primary transition-colors cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Process Automation
+              </li>
+              <li 
+                className="hover:text-primary transition-colors cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Predictive Analytics
+              </li>
+              <li 
+                className="hover:text-primary transition-colors cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Team Training
+              </li>
             </ul>
           </div>
           

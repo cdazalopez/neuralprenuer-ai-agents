@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Bot, Lightbulb, Settings, TrendingUp, Users, Zap } from "lucide-react";
 
 const Services = () => {
@@ -79,6 +80,18 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-6">
+                  <Button 
+                    variant="outline" 
+                    className="w-full group-hover:bg-primary/10"
+                    onClick={() => {
+                      const element = document.getElementById('contact');
+                      if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
