@@ -4,10 +4,10 @@ import { CheckCircle, Target, Award, Users2 } from "lucide-react";
 
 const About = () => {
   const stats = [
-    { icon: Users2, label: "Businesses Transformed", value: "50+" },
-    { icon: Target, label: "Success Rate", value: "98%" },
-    { icon: Award, label: "Years Experience", value: "5+" },
-    { icon: CheckCircle, label: "AI Solutions Deployed", value: "200+" }
+    { icon: Target, label: "AI Technologies", value: "15+" },
+    { icon: Users2, label: "Industries Covered", value: "8+" },
+    { icon: Award, label: "Certified Partners", value: "3+" },
+    { icon: CheckCircle, label: "Free Consultations", value: "100%" }
   ];
 
   return (
@@ -41,7 +41,7 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Proven Results</h3>
-                  <p className="text-muted-foreground">Our clients see average productivity increases of 40% and cost reductions of 25% within the first six months.</p>
+                  <p className="text-muted-foreground">We leverage the latest AI technologies and industry best practices to deliver solutions that drive real business value.</p>
                 </div>
               </div>
               

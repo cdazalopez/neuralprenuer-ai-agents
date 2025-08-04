@@ -50,11 +50,11 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
-                <span>hello@neuralprenuer.com</span>
+                <span>contact@neuralprenuer.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+1 832.560.3116</span>
               </li>
               <li>Mon - Fri: 9AM - 6PM EST</li>
             </ul>
