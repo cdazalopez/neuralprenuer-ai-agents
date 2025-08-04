@@ -63,6 +63,19 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			backgroundImage: {
+				'gradient-neural': 'var(--gradient-neural)',
+				'gradient-neural-muted': 'var(--gradient-neural-muted)',
+				'gradient-hero': 'var(--gradient-hero)',
+			},
+			boxShadow: {
+				'glow-neural': 'var(--glow-neural)',
+				'glow-accent': 'var(--glow-accent)',
+			},
+			transitionProperty: {
+				'smooth': 'var(--transition-smooth)',
+				'glow': 'var(--transition-glow)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
