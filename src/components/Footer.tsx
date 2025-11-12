@@ -1,4 +1,5 @@
-import { Brain, Mail, Phone, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, Linkedin, Twitter } from "lucide-react";
+import logo from "@/assets/neuralprenuer-logo.png";
 
 const Footer = () => {
   return (
@@ -7,10 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-neural rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-background" />
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img src={logo} alt="Neuralprenuer Logo" className="w-10 h-10 object-contain" />
               <span className="text-xl font-bold bg-gradient-neural bg-clip-text text-transparent">
                 Neuralprenuer
               </span>
