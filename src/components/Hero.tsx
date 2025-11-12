@@ -25,7 +25,7 @@ const Hero = () => {
         </div>
         
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-neural bg-clip-text text-transparent leading-tight">
-          Neuralprenuer
+          Neuralprenuer AI
         </h1>
         
         <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto leading-relaxed">

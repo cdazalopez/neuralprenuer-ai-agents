@@ -17,7 +17,7 @@ const About = () => {
           {/* Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-neural bg-clip-text text-transparent">
-              Why Choose Neuralprenuer?
+              Why Choose Neuralprenuer AI?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               We're not just AI consultants – we're your partners in digital transformation. 
