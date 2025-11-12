@@ -15,9 +15,9 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src={logo} alt="Neuralprenuer Logo" className="w-10 h-10 object-contain" />
+            <img src={logo} alt="Neuralprenuer AI Logo" className="w-10 h-10 object-contain" />
             <span className="text-xl font-bold bg-gradient-neural bg-clip-text text-transparent">
-              Neuralprenuer
+              Neuralprenuer AI
             </span>
           </div>
           

@@ -9,9 +9,9 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="Neuralprenuer Logo" className="w-10 h-10 object-contain" />
+              <img src={logo} alt="Neuralprenuer AI Logo" className="w-10 h-10 object-contain" />
               <span className="text-xl font-bold bg-gradient-neural bg-clip-text text-transparent">
-                Neuralprenuer
+                Neuralprenuer AI
               </span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
@@ -101,7 +101,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-border/50 mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Neuralprenuer. All rights reserved. | Transforming businesses with AI.</p>
+          <p>&copy; 2024 Neuralprenuer AI. All rights reserved. | Transforming businesses with AI.</p>
         </div>
       </div>
     </footer>
