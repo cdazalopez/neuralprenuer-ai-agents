@@ -19,6 +19,9 @@ const About = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-neural bg-clip-text text-transparent">
               Why Choose Neuralprenuer AI?
             </h2>
+            <p className="text-lg italic text-primary mb-4">
+              Intelligent Solutions. Real Results.
+            </p>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               We're not just AI consultants – we're your partners in digital transformation. 
               Our mission is to make advanced AI accessible and profitable for small businesses.
