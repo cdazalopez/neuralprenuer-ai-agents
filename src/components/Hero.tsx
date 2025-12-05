@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Zap } from "lucide-react";
+import { ArrowRight, Bot, Code } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
 
 const Hero = () => {
@@ -10,7 +10,7 @@ const Hero = () => {
       
       {/* Neural network background image */}
       <div 
-        className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${neuralHero})` }}
       ></div>
       
@@ -20,17 +20,21 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="flex items-center justify-center mb-6 space-x-2">
-          <Brain className="w-8 h-8 text-primary animate-pulse" />
-          <Zap className="w-6 h-6 text-accent" />
+          <Bot className="w-8 h-8 text-primary animate-pulse" />
+          <Code className="w-6 h-6 text-accent" />
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-neural bg-clip-text text-transparent leading-tight">
-          Neuralprenuer AI
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-neural bg-clip-text text-transparent leading-tight">
+          Neuralprenuer<span className="text-foreground">AI</span>
         </h1>
         
-        <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Empowering small businesses with intelligent AI solutions and custom agents. 
-          Transform your operations with cutting-edge artificial intelligence.
+        <p className="text-2xl md:text-3xl font-light italic mb-8 text-muted-foreground">
+          Intelligent Solutions. Real Results.
+        </p>
+        
+        <p className="text-lg md:text-xl mb-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          Empowering small businesses with custom AI agents and intelligent automation 
+          that drive measurable growth and efficiency.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
