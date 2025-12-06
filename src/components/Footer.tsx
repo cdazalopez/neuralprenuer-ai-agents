@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img src={logo} alt="Neuralprenuer AI" className="h-24 w-auto object-contain" />
+              <img src={logo} alt="Neuralprenuer AI" className="h-32 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
               Empowering small businesses with custom AI agents and intelligent automation 
