@@ -8,11 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="Neuralprenuer AI Logo" className="w-10 h-10 object-contain" />
-            <span className="text-xl font-bold">
-              <span className="text-primary">Neuralprenuer</span><span className="text-accent">AI</span>
-            </span>
+            <div className="flex items-center mb-4">
+              <img src={logo} alt="Neuralprenuer AI" className="h-16 w-auto object-contain" />
             </div>
             <p className="text-lg italic text-primary mb-4">
               Intelligent Solutions. Real Results.
