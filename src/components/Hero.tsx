@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, Code } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
+import logo from "@/assets/neuralprenuer-logo.png";
 
 const Hero = () => {
   return (
@@ -19,14 +20,14 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="flex items-center justify-center mb-6 space-x-2">
-          <Bot className="w-8 h-8 text-primary animate-pulse" />
-          <Code className="w-6 h-6 text-accent" />
+        {/* Logo Image */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src={logo} 
+            alt="Neuralprenuer AI - Intelligent Solutions. Real Results." 
+            className="w-72 md:w-96 h-auto"
+          />
         </div>
-        
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-neural bg-clip-text text-transparent leading-tight">
-          Neuralprenuer<span className="text-foreground">AI</span>
-        </h1>
         
         <p className="text-2xl md:text-3xl font-light italic mb-8 text-muted-foreground">
           Intelligent Solutions. Real Results.
