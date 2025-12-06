@@ -14,11 +14,8 @@ const Navigation = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <img src={logo} alt="Neuralprenuer AI Logo" className="w-10 h-10 object-contain" />
-            <span className="text-xl font-bold">
-              <span className="text-primary">Neuralprenuer</span><span className="text-accent">AI</span>
-            </span>
+          <div className="flex items-center">
+            <img src={logo} alt="Neuralprenuer AI" className="h-10 w-auto object-contain" />
           </div>
           
           {/* Navigation Links */}
