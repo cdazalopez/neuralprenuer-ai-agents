@@ -195,7 +195,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold">Location</h3>
-                    <p className="text-muted-foreground">Conroe, TX & Remote</p>
+                    <p className="text-muted-foreground">Conroe, TX</p>
                   </div>
                 </div>
               </CardContent>
