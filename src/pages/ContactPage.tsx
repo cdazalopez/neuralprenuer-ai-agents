@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Instagram } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
 import { siteConfig, organizationSchema } from "@/lib/seo-data";
@@ -220,6 +220,42 @@ const ContactPage = () => {
                         <h3 className="font-semibold">Location</h3>
                         <p className="text-muted-foreground">{siteConfig.location}</p>
                       </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                {/* Social Media Links */}
+                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold mb-4">Connect With Us</h3>
+                    <div className="flex space-x-4">
+                      <a 
+                        href="https://x.com/neuralprenuer" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
+                        aria-label="X (Twitter)"
+                      >
+                        <svg className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                      </a>
+                      <a 
+                        href="https://www.instagram.com/neuralprenuer.ai/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
+                        aria-label="Instagram"
+                      >
+                        <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" />
+                      </a>
+                      <a 
+                        href={`mailto:${siteConfig.email}`}
+                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
+                        aria-label="Email"
+                      >
+                        <Mail className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" />
+                      </a>
                     </div>
                   </CardContent>
                 </Card>

@@ -38,7 +38,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://instagram.com/neuralprenuer.ai" 
+                href="https://www.instagram.com/neuralprenuer.ai/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 cursor-pointer group"
