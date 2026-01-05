@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Target, Award, Users2 } from "lucide-react";
+import { CheckCircle, Target, Award, Users2, ArrowRight } from "lucide-react";
 
 const About = () => {
   const stats = [
@@ -59,9 +60,12 @@ const About = () => {
               </div>
             </div>
             
-            <Button variant="neural" size="lg">
-              Schedule Free Consultation
-            </Button>
+            <Link to="/contact">
+              <Button variant="neural" size="lg">
+                Schedule Free Consultation
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
           </div>
           
           {/* Stats Grid */}
