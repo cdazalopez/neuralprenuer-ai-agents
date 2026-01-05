@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
@@ -39,27 +40,17 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button 
-            variant="hero" 
-            className="group"
-            onClick={() => {
-              const element = document.getElementById('contact');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Start Your AI Journey
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg"
-            onClick={() => {
-              const element = document.getElementById('services');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            View Our Services
-          </Button>
+          <Link to="/contact">
+            <Button variant="hero" className="group">
+              Start Your AI Journey
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+          <Link to="/services">
+            <Button variant="outline" size="lg">
+              View Our Services
+            </Button>
+          </Link>
         </div>
         
         {/* Trust indicators */}
