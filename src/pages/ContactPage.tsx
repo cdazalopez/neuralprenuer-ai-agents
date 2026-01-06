@@ -241,13 +241,17 @@ const ContactPage = () => {
                         </svg>
                       </a>
                       <a 
-                        href="https://www.instagram.com/neuralprenuer.ai/" 
+                        href="https://www.instagram.com/neuralprenuer.ai/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
                         aria-label="Instagram"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open("https://www.instagram.com/neuralprenuer.ai/", "_blank", "noopener,noreferrer");
+                        }}
                       >
-                        <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" />
+                        <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors pointer-events-none" />
                       </a>
                       <a 
                         href={`mailto:${siteConfig.email}`}
