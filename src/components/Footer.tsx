@@ -38,13 +38,17 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://www.instagram.com/neuralprenuer.ai/" 
+                href="https://www.instagram.com/neuralprenuer.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 cursor-pointer group"
                 aria-label="Instagram"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open("https://www.instagram.com/neuralprenuer.ai/", "_blank", "noopener,noreferrer");
+                }}
               >
-                <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors pointer-events-none" />
               </a>
               <a 
                 href={`mailto:${siteConfig.email}`}
