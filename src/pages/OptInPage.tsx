@@ -58,9 +58,23 @@ const OptInPage = () => {
 
       if (error) throw error;
 
+      // Send confirmation email
+      try {
+        await supabase.functions.invoke('send-opt-in-confirmation', {
+          body: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+          },
+        });
+      } catch (emailError) {
+        console.error('Email sending error:', emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast({
         title: "Successfully subscribed!",
-        description: "Thank you for joining our community. We'll be in touch soon.",
+        description: "Thank you for joining our community. Check your email for a confirmation.",
       });
       
       reset();
