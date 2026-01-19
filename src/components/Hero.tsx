@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
 import logo from "@/assets/neuralprenuer-logo.png";
 
@@ -40,14 +40,20 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Link to="/contact">
+          <Link to="/booking">
             <Button variant="hero" className="group">
-              Start Your AI Journey
+              <Calendar className="w-5 h-5" />
+              Book a Free Demo
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
-          <Link to="/services">
+          <Link to="/contact">
             <Button variant="outline" size="lg">
+              Start Your AI Journey
+            </Button>
+          </Link>
+          <Link to="/services">
+            <Button variant="ghost" size="lg">
               View Our Services
             </Button>
           </Link>
