@@ -43,7 +43,7 @@ const Hero = () => {
           <Link to="/booking">
             <Button variant="hero" className="group">
               <Calendar className="w-5 h-5" />
-              Book a Free Demo
+              Book a Free Consultation
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
