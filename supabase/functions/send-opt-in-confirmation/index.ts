@@ -24,7 +24,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { firstName, lastName, email }: OptInEmailRequest = await req.json();
 
     const emailResponse = await resend.emails.send({
-      from: "NeuralPreneur <contact@neuralprenuer.com>",
+      from: "NeuralPreneur <contact@update.neuralprenuer.com>",
       to: [email],
       subject: "Welcome to NeuralPreneur AI Insights!",
       html: `
