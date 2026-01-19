@@ -1,24 +1,11 @@
-import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Calendar, Video, Clock, CheckCircle } from "lucide-react";
 
 const BookingPage = () => {
-  const [calendlyUrl, setCalendlyUrl] = useState("");
-  const [isEmbedded, setIsEmbedded] = useState(false);
-
-  // Default Calendly URL - replace with your actual Calendly link
-  const defaultCalendlyUrl = "https://calendly.com/your-username";
-
-  const handleEmbed = () => {
-    if (calendlyUrl) {
-      setIsEmbedded(true);
-    }
-  };
+  const calendlyUrl = "https://calendly.com/carlos-neuralprenuer/30min";
 
   const benefits = [
     {
@@ -82,71 +69,18 @@ const BookingPage = () => {
               ))}
             </div>
 
-            {/* Calendly Embed Section */}
+            {/* Calendly Embed */}
             <div className="max-w-4xl mx-auto">
-              {!isEmbedded ? (
-                <div className="bg-card border border-border rounded-2xl p-8">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold mb-4">Enter Your Calendly Link</h2>
-                    <p className="text-muted-foreground">
-                      Paste your Calendly scheduling link below to embed it on this page.
-                      Make sure your Calendly is connected to Microsoft Teams for automatic meeting creation.
-                    </p>
-                  </div>
-                  
-                  <div className="max-w-md mx-auto space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="calendly-url">Calendly URL</Label>
-                      <Input
-                        id="calendly-url"
-                        type="url"
-                        placeholder="https://calendly.com/your-username/30min"
-                        value={calendlyUrl}
-                        onChange={(e) => setCalendlyUrl(e.target.value)}
-                        className="bg-background"
-                      />
-                    </div>
-                    <Button
-                      onClick={handleEmbed}
-                      disabled={!calendlyUrl}
-                      className="w-full bg-gradient-neural hover:opacity-90"
-                    >
-                      Embed Calendar
-                    </Button>
-                  </div>
-
-                  <div className="mt-8 p-4 bg-secondary/50 rounded-lg">
-                    <h3 className="font-semibold mb-2 text-sm">How to set up:</h3>
-                    <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
-                      <li>Go to <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Calendly.com</a> and create an account</li>
-                      <li>Connect your Microsoft 365 account in Calendly settings</li>
-                      <li>Create an event type and enable "Microsoft Teams" as the location</li>
-                      <li>Copy your event link and paste it above</li>
-                    </ol>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-card border border-border rounded-2xl overflow-hidden">
-                  <div className="p-4 border-b border-border flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Booking Calendar</span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setIsEmbedded(false)}
-                    >
-                      Change Calendar
-                    </Button>
-                  </div>
-                  <iframe
-                    src={calendlyUrl}
-                    width="100%"
-                    height="700"
-                    frameBorder="0"
-                    title="Schedule a demo"
-                    className="bg-white"
-                  />
-                </div>
-              )}
+              <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                <iframe
+                  src={calendlyUrl}
+                  width="100%"
+                  height="700"
+                  frameBorder="0"
+                  title="Schedule a demo"
+                  className="bg-white"
+                />
+              </div>
             </div>
 
             {/* Alternative CTA */}
