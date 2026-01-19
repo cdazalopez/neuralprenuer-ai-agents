@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Bot, Lightbulb, Settings, TrendingUp, Users, Zap } from "lucide-react";
+import { Menu, X, ChevronDown, Bot, Lightbulb, Settings, TrendingUp, Users, Zap, Calendar } from "lucide-react";
 import logo from "@/assets/neuralprenuer-logo.png";
 import { servicesData } from "@/lib/seo-data";
 
@@ -125,8 +125,14 @@ const Navigation = () => {
             ))}
           </div>
           
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link to="/booking">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Calendar className="w-4 h-4" />
+                Book Demo
+              </Button>
+            </Link>
             <Link to="/contact">
               <Button variant="neural" size="sm">
                 Free Consultation
@@ -212,7 +218,13 @@ const Navigation = () => {
                 </Link>
               ))}
               
-              <Link to="/contact" onClick={() => setIsOpen(false)}>
+              <Link to="/booking" onClick={() => setIsOpen(false)} className="w-full">
+                <Button variant="outline" className="w-full mt-2 gap-2">
+                  <Calendar className="w-4 h-4" />
+                  Book Demo
+                </Button>
+              </Link>
+              <Link to="/contact" onClick={() => setIsOpen(false)} className="w-full">
                 <Button variant="neural" className="w-full mt-2">
                   Free Consultation
                 </Button>
