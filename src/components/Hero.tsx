@@ -47,11 +47,6 @@ const Hero = () => {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
-          <Link to="/contact">
-            <Button variant="outline" size="lg">
-              Start Your AI Journey
-            </Button>
-          </Link>
           <Link to="/services">
             <Button variant="ghost" size="lg">
               View Our Services
