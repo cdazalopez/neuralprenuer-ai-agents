@@ -3,9 +3,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
+import { siteConfig } from "@/lib/seo-data";
+import { Link } from "react-router-dom";
 
 type FormData = {
   firstName: string;
@@ -13,12 +16,30 @@ type FormData = {
   email: string;
   company: string;
   message: string;
+  marketingConsent: boolean;
+  privacyPolicyAccepted: boolean;
 };
 
 const Contact = () => {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>();
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
+    defaultValues: {
+      marketingConsent: false,
+      privacyPolicyAccepted: false,
+    }
+  });
+
+  const privacyAccepted = watch("privacyPolicyAccepted");
 
   const onSubmit = async (data: FormData) => {
+    if (!data.privacyPolicyAccepted) {
+      toast({
+        title: "Required consent missing",
+        description: "Please accept the Privacy Policy to send your message.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -130,12 +151,45 @@ const Contact = () => {
                     <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
                   )}
                 </div>
+
+                {/* Consent Checkboxes */}
+                <div className="space-y-4 border-t border-border pt-4">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox 
+                      id="contact-marketingConsent"
+                      checked={watch("marketingConsent")}
+                      onCheckedChange={(checked) => setValue("marketingConsent", checked as boolean)}
+                    />
+                    <Label htmlFor="contact-marketingConsent" className="text-sm leading-relaxed cursor-pointer">
+                      I agree to receive marketing communications from {siteConfig.name}. (Optional)
+                    </Label>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <Checkbox 
+                      id="contact-privacyPolicyAccepted"
+                      checked={privacyAccepted}
+                      onCheckedChange={(checked) => setValue("privacyPolicyAccepted", checked as boolean)}
+                    />
+                    <Label htmlFor="contact-privacyPolicyAccepted" className="text-sm leading-relaxed cursor-pointer">
+                      I have read and agree to the{" "}
+                      <Link to="/privacy-policy" className="text-primary hover:underline" target="_blank">
+                        Privacy Policy
+                      </Link>
+                      . *
+                    </Label>
+                  </div>
+                </div>
+
+                <p className="text-xs text-muted-foreground">
+                  * Required. By submitting this form, you consent to us processing your data to respond to your inquiry.
+                </p>
                 
                 <Button 
                   type="submit" 
                   variant="neural" 
                   className="w-full" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !privacyAccepted}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>

@@ -94,9 +94,22 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-border/50 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} NeuralprenuerAI. All rights reserved.</p>
-          <p className="mt-2 md:mt-0 italic">{siteConfig.tagline}</p>
+        <div className="border-t border-border/50 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
+            <p>&copy; {new Date().getFullYear()} NeuralprenuerAI. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              <Link to="/privacy-policy" className="hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-of-service" className="hover:text-primary transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/opt-in" className="hover:text-primary transition-colors">
+                Subscribe
+              </Link>
+            </div>
+            <p className="italic">{siteConfig.tagline}</p>
+          </div>
         </div>
       </div>
     </footer>
