@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { jsPDF } from "jspdf";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -10,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Calendar, HelpCircle, Briefcase, DollarSign, Clock, Cpu, Building2, Rocket } from "lucide-react";
+import { Calendar, HelpCircle, Briefcase, DollarSign, Clock, Cpu, Building2, Rocket, Download } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -177,6 +179,99 @@ const faqCategories: FAQCategory[] = [
 ];
 
 const FAQPage = () => {
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const generatePDF = () => {
+    setIsGenerating(true);
+    
+    try {
+      const doc = new jsPDF();
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const margin = 20;
+      const maxWidth = pageWidth - margin * 2;
+      let yPosition = 20;
+
+      // Title
+      doc.setFontSize(24);
+      doc.setFont("helvetica", "bold");
+      doc.text("Neuralprenuer AI", pageWidth / 2, yPosition, { align: "center" });
+      yPosition += 10;
+      
+      doc.setFontSize(16);
+      doc.text("Frequently Asked Questions", pageWidth / 2, yPosition, { align: "center" });
+      yPosition += 15;
+
+      // Contact info
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text("Phone: +1 936.202.9970 | Email: contact@neuralprenuer.com", pageWidth / 2, yPosition, { align: "center" });
+      doc.text("Website: neuralprenuer.com", pageWidth / 2, yPosition + 5, { align: "center" });
+      yPosition += 20;
+
+      // Loop through categories
+      faqCategories.forEach((category) => {
+        // Check if we need a new page
+        if (yPosition > 260) {
+          doc.addPage();
+          yPosition = 20;
+        }
+
+        // Category title
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(79, 70, 229); // Primary color
+        doc.text(category.title, margin, yPosition);
+        yPosition += 8;
+        doc.setTextColor(0, 0, 0);
+
+        // Questions
+        category.questions.forEach((faq) => {
+          if (yPosition > 250) {
+            doc.addPage();
+            yPosition = 20;
+          }
+
+          // Question
+          doc.setFontSize(11);
+          doc.setFont("helvetica", "bold");
+          const questionLines = doc.splitTextToSize(`Q: ${faq.question}`, maxWidth);
+          doc.text(questionLines, margin, yPosition);
+          yPosition += questionLines.length * 5 + 2;
+
+          // Answer
+          doc.setFontSize(10);
+          doc.setFont("helvetica", "normal");
+          const answerLines = doc.splitTextToSize(`A: ${faq.answer}`, maxWidth);
+          doc.text(answerLines, margin, yPosition);
+          yPosition += answerLines.length * 4.5 + 8;
+        });
+
+        yPosition += 5;
+      });
+
+      // Footer on last page
+      const pageCount = doc.internal.pages.length - 1;
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(128, 128, 128);
+        doc.text(
+          `Page ${i} of ${pageCount} | Generated ${new Date().toLocaleDateString()}`,
+          pageWidth / 2,
+          doc.internal.pageSize.getHeight() - 10,
+          { align: "center" }
+        );
+      }
+
+      doc.save("Neuralprenuer-AI-FAQ.pdf");
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -206,6 +301,20 @@ const FAQPage = () => {
         title="Frequently Asked Questions"
         description="Everything you need to know about our AI services and how we help small businesses succeed."
       />
+
+      {/* Download PDF Button */}
+      <div className="container mx-auto px-6 pt-8 flex justify-center">
+        <Button 
+          onClick={generatePDF} 
+          variant="outline" 
+          size="lg" 
+          className="gap-2"
+          disabled={isGenerating}
+        >
+          <Download className="w-5 h-5" />
+          {isGenerating ? "Generating..." : "Download FAQ as PDF"}
+        </Button>
+      </div>
 
       <section className="py-16">
         <div className="container mx-auto px-6">
