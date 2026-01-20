@@ -69,7 +69,10 @@ const OptInPage = () => {
           },
         });
       } catch (emailError) {
-        console.error('Email sending error:', emailError);
+        // Log only in development to prevent info leakage in production
+        if (import.meta.env.DEV) {
+          console.error('Email sending error:', emailError);
+        }
         // Don't fail the submission if email fails
       }
 
@@ -80,7 +83,10 @@ const OptInPage = () => {
       
       reset();
     } catch (error) {
-      console.error('Opt-in submission error:', error);
+      // Log only in development to prevent info leakage in production
+      if (import.meta.env.DEV) {
+        console.error('Opt-in submission error:', error);
+      }
       toast({
         title: "Error submitting form",
         description: "Please try again or contact us directly.",

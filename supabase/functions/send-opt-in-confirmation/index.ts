@@ -4,11 +4,30 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+// Allowed origins for CORS - restrict to actual domains
+const ALLOWED_ORIGINS = [
+  'https://neuralprenuer.com',
+  'https://www.neuralprenuer.com',
+  'https://neuralprenuer-ai-agents.lovable.app',
+  'https://id-preview--6adb47e2-1722-45bf-82c3-fcb66d2669a5.lovable.app',
+];
+
+// Add development origin only in development environment
+if (Deno.env.get("DENO_ENV") !== "production") {
+  ALLOWED_ORIGINS.push('http://localhost:5173');
+  ALLOWED_ORIGINS.push('http://localhost:3000');
+}
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const allowedOrigin = origin && ALLOWED_ORIGINS.some(allowed => origin === allowed || origin.endsWith('.lovable.app'))
+    ? origin 
+    : ALLOWED_ORIGINS[0];
+  
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  };
+}
 
 interface OptInEmailRequest {
   firstName: string;
@@ -17,6 +36,9 @@ interface OptInEmailRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  const origin = req.headers.get('origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -42,10 +64,10 @@ const handler = async (req: Request): Promise<Response> => {
     // This prevents abuse by only allowing emails to verified opt-in submissions
     const { data: submission, error: queryError } = await supabase
       .from("opt_in_submissions")
-      .select("id, email, first_name, last_name")
-      .eq("email", email)
-      .eq("first_name", firstName)
-      .eq("last_name", lastName)
+      .select("id, email, first_name, last_name, updated_at")
+      .eq("email", email.toLowerCase().trim())
+      .eq("first_name", firstName.trim())
+      .eq("last_name", lastName.trim())
       .order("created_at", { ascending: false })
       .limit(1)
       .single();
@@ -55,6 +77,19 @@ const handler = async (req: Request): Promise<Response> => {
       return new Response(
         JSON.stringify({ error: "Invalid submission - email not allowed" }),
         { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Rate limiting: Check if email was sent recently (within 1 hour)
+    const lastUpdate = new Date(submission.updated_at);
+    const timeSinceUpdate = Date.now() - lastUpdate.getTime();
+    const MIN_INTERVAL = 60 * 60 * 1000; // 1 hour in milliseconds
+
+    if (timeSinceUpdate < MIN_INTERVAL && timeSinceUpdate > 5000) {
+      // More than 5 seconds old but less than 1 hour - likely a re-send attempt
+      return new Response(
+        JSON.stringify({ error: "Email already sent recently. Please try again later." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
@@ -117,10 +152,10 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error: any) {
     console.error("Error in send-opt-in-confirmation function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An error occurred processing your request" }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+        headers: { "Content-Type": "application/json", ...getCorsHeaders(req.headers.get('origin')) },
       }
     );
   }
