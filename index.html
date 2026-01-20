@@ -56,6 +56,70 @@
 
   <body>
     <div id="root"></div>
+
+    <!-- Crawlable static content for bots/LLMs that can fetch HTML but may not execute JS reliably.
+         This is positioned off-screen (not display:none) so text remains parseable. -->
+    <div id="crawlable-content" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+      <header>
+        <h1>Neuralprenuer AI - AI Consulting &amp; Agent Design for Small Businesses</h1>
+        <p>Empowering small business owners to harness the power of AI through custom agent design and strategic automation.</p>
+      </header>
+
+      <main>
+        <section>
+          <h2>Our Services</h2>
+          <article>
+            <h3>AI Agent Development</h3>
+            <p>Custom AI agents designed to automate tasks, enhance customer service, and streamline operations for your business.</p>
+          </article>
+          <article>
+            <h3>AI Strategy Consulting</h3>
+            <p>Strategic roadmaps to integrate AI into your business, identifying opportunities for automation and growth.</p>
+          </article>
+          <article>
+            <h3>Process Automation</h3>
+            <p>Intelligent workflow automation to reduce manual tasks and increase efficiency across your operations.</p>
+          </article>
+          <article>
+            <h3>Predictive Analytics</h3>
+            <p>Data-driven insights and forecasting to help you make smarter business decisions.</p>
+          </article>
+          <article>
+            <h3>Team Training</h3>
+            <p>Comprehensive AI training programs to upskill your team and maximize adoption.</p>
+          </article>
+          <article>
+            <h3>Rapid Prototyping</h3>
+            <p>Fast AI proof-of-concepts to validate ideas and demonstrate ROI before full implementation.</p>
+          </article>
+        </section>
+
+        <section>
+          <h2>About Neuralprenuer AI</h2>
+          <p>We're a specialized AI consulting firm focused on helping small businesses leverage artificial intelligence. Our team combines deep technical expertise with practical business understanding to deliver solutions that drive real results.</p>
+        </section>
+
+        <section>
+          <h2>Contact Us</h2>
+          <p>Email: contact@neuralprenuer.com</p>
+          <p>Phone: +1 (936) 202-9970</p>
+          <p>Location: Conroe, TX, USA</p>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2025 Neuralprenuer AI. All rights reserved.</p>
+        <nav>
+          <a href="/services">Services</a>
+          <a href="/about">About</a>
+          <a href="/technologies">Technologies</a>
+          <a href="/contact">Contact</a>
+          <a href="/booking">Book a Consultation</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+        </nav>
+      </footer>
+    </div>
     
     <!-- Static content for crawlers that don't execute JavaScript -->
     <noscript>
