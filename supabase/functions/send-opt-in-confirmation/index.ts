@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -22,6 +23,40 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { firstName, lastName, email }: OptInEmailRequest = await req.json();
+
+    // Validate input
+    if (!firstName || !lastName || !email) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Create Supabase client with service role to verify submission exists
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    // Verify the submission exists in database before sending email
+    // This prevents abuse by only allowing emails to verified opt-in submissions
+    const { data: submission, error: queryError } = await supabase
+      .from("opt_in_submissions")
+      .select("id, email, first_name, last_name")
+      .eq("email", email)
+      .eq("first_name", firstName)
+      .eq("last_name", lastName)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (queryError || !submission) {
+      console.error("Submission verification failed:", queryError);
+      return new Response(
+        JSON.stringify({ error: "Invalid submission - email not allowed" }),
+        { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
     const emailResponse = await resend.emails.send({
       from: "NeuralPreneur <contact@updates.neuralprenuer.com>",
