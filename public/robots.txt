@@ -10,7 +10,20 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
 User-agent: *
 Allow: /
 
 Sitemap: https://neuralprenuer.com/sitemap.xml
+LLMs: https://neuralprenuer.com/llms.txt
