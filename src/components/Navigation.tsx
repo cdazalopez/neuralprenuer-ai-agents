@@ -23,6 +23,7 @@ const Navigation = () => {
     { label: "Home", href: "/" },
     { label: "Technologies", href: "/technologies" },
     { label: "About", href: "/about" },
+    { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ];
 
