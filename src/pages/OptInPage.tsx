@@ -46,14 +46,15 @@ const OptInPage = () => {
     }
 
     try {
-      const { error } = await supabase.from('opt_in_submissions').insert({
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email: data.email,
-        phone: data.phone || null,
-        marketing_consent: data.marketingConsent,
-        privacy_policy_accepted: data.privacyPolicyAccepted,
-        terms_accepted: data.termsAccepted,
+      // Use the server-side validated function instead of direct insert
+      const { error } = await supabase.rpc('submit_opt_in', {
+        p_first_name: data.firstName.trim(),
+        p_last_name: data.lastName.trim(),
+        p_email: data.email.trim().toLowerCase(),
+        p_phone: data.phone?.trim() || null,
+        p_marketing_consent: data.marketingConsent,
+        p_privacy_policy_accepted: data.privacyPolicyAccepted,
+        p_terms_accepted: data.termsAccepted,
       });
 
       if (error) throw error;
