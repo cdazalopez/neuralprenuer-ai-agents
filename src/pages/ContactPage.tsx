@@ -36,7 +36,7 @@ const ContactPage = () => {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch">
               {/* Contact Form */}
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full lg:min-h-[1004px]">
+              <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full lg:min-h-[988px]">
                 <CardHeader>
                   <CardTitle className="text-2xl">Get In Touch</CardTitle>
                   <CardDescription>
@@ -46,8 +46,8 @@ const ContactPage = () => {
                 <CardContent className="flex-1">
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                    style={{ width: '100%', height: '1004px', border: 'none', borderRadius: '3px' }}
-                    id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
+                    style={{ width: '100%', height: '100%', border: 'none', borderRadius: '5px' }}
+                    id="inline-7HpiXRMMtLQH0GtB4pEG"
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
                     data-trigger-value=""
@@ -56,8 +56,8 @@ const ContactPage = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="Free Consult"
-                    data-height="1004"
-                    data-layout-iframe-id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
+                    data-height="988"
+                    data-layout-iframe-id="inline-7HpiXRMMtLQH0GtB4pEG"
                     data-form-id="7HpiXRMMtLQH0GtB4pEG"
                     title="Free Consult"
                   />
@@ -65,7 +65,7 @@ const ContactPage = () => {
               </Card>
               
               {/* Contact Information */}
-              <div className="flex flex-col gap-6 h-full justify-between lg:min-h-[1004px]">
+              <div className="flex flex-col gap-6 h-full justify-between lg:min-h-[988px]">
                 <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4">
