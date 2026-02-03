@@ -68,99 +68,102 @@ const ContactPage = () => {
               </Card>
               
               {/* Contact Information */}
-              <div className="flex flex-col gap-6 h-full justify-between lg:min-h-[1100px]">
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-neural rounded-lg flex items-center justify-center">
-                        <Mail className="w-6 h-6 text-background" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Email</h3>
-                        <a href={`mailto:${siteConfig.email}`} className="text-muted-foreground hover:text-primary transition-colors">
-                          {siteConfig.email}
-                        </a>
-                      </div>
+              <div className="flex flex-col h-full lg:min-h-[1100px]">
+                {/* Main Info Card */}
+                <Card className="border-border/50 bg-gradient-to-br from-card via-card to-secondary/30 backdrop-blur-sm flex-1">
+                  <CardContent className="p-8 flex flex-col h-full">
+                    {/* Header */}
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold mb-2 bg-gradient-neural bg-clip-text text-transparent">
+                        Contact Information
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Reach out through any of these channels
+                      </p>
                     </div>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-neural rounded-lg flex items-center justify-center">
-                        <Phone className="w-6 h-6 text-background" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Phone</h3>
-                        <a href={`tel:${siteConfig.phone.replace(/[^+\d]/g, '')}`} className="text-muted-foreground hover:text-primary transition-colors">
-                          {siteConfig.phone}
-                        </a>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-neural rounded-lg flex items-center justify-center">
-                        <Clock className="w-6 h-6 text-background" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Business Hours</h3>
-                        <p className="text-muted-foreground">{siteConfig.hours}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-neural rounded-lg flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-background" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Location</h3>
-                        <p className="text-muted-foreground">{siteConfig.location}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                {/* Social Media Links */}
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold mb-4">Connect With Us</h3>
-                    <div className="flex space-x-4">
-                      <a 
-                        href="https://x.com/neuralprenuer" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
-                        aria-label="X (Twitter)"
-                      >
-                        <svg className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                      </a>
-                      <a 
-                        href="https://www.instagram.com/neuralprenuer.ai/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
-                        aria-label="Instagram"
-                      >
-                        <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors pointer-events-none" />
-                      </a>
+                    
+                    {/* Contact Details */}
+                    <div className="space-y-6 flex-1">
+                      {/* Email */}
                       <a 
                         href={`mailto:${siteConfig.email}`}
-                        className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group"
-                        aria-label="Email"
+                        className="group flex items-center gap-5 p-5 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-secondary transition-all duration-300"
                       >
-                        <Mail className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" />
+                        <div className="w-14 h-14 bg-gradient-neural rounded-xl flex items-center justify-center shrink-0 group-hover:shadow-glow-neural transition-shadow">
+                          <Mail className="w-6 h-6 text-background" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Email Us</p>
+                          <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {siteConfig.email}
+                          </p>
+                        </div>
                       </a>
+                      
+                      {/* Phone */}
+                      <a 
+                        href={`tel:${siteConfig.phone.replace(/[^+\d]/g, '')}`}
+                        className="group flex items-center gap-5 p-5 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-secondary transition-all duration-300"
+                      >
+                        <div className="w-14 h-14 bg-gradient-neural rounded-xl flex items-center justify-center shrink-0 group-hover:shadow-glow-neural transition-shadow">
+                          <Phone className="w-6 h-6 text-background" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Call Us</p>
+                          <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {siteConfig.phone}
+                          </p>
+                        </div>
+                      </a>
+                      
+                      {/* Location */}
+                      <div className="flex items-center gap-5 p-5 rounded-xl bg-secondary/50 border border-border/50">
+                        <div className="w-14 h-14 bg-gradient-neural rounded-xl flex items-center justify-center shrink-0">
+                          <MapPin className="w-6 h-6 text-background" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Location</p>
+                          <p className="font-semibold text-foreground">{siteConfig.location}</p>
+                        </div>
+                      </div>
+                      
+                      {/* Hours */}
+                      <div className="flex items-center gap-5 p-5 rounded-xl bg-secondary/50 border border-border/50">
+                        <div className="w-14 h-14 bg-gradient-neural rounded-xl flex items-center justify-center shrink-0">
+                          <Clock className="w-6 h-6 text-background" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Business Hours</p>
+                          <p className="font-semibold text-foreground">{siteConfig.hours}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Social Links */}
+                    <div className="mt-8 pt-8 border-t border-border/50">
+                      <p className="text-sm text-muted-foreground mb-4">Follow us on social media</p>
+                      <div className="flex gap-4">
+                        <a 
+                          href="https://x.com/neuralprenuer" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-14 h-14 bg-secondary/80 rounded-xl flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group border border-border/50 hover:border-primary/50"
+                          aria-label="X (Twitter)"
+                        >
+                          <svg className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                          </svg>
+                        </a>
+                        <a 
+                          href="https://www.instagram.com/neuralprenuer.ai/" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-14 h-14 bg-secondary/80 rounded-xl flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group border border-border/50 hover:border-primary/50"
+                          aria-label="Instagram"
+                        >
+                          <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-background transition-colors" />
+                        </a>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
