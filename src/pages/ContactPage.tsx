@@ -41,7 +41,7 @@ const ContactPage = () => {
               {/* Contact Form */}
               <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full lg:min-h-[1100px]">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Get In Touch</CardTitle>
+                  <CardTitle className="text-2xl bg-gradient-neural bg-clip-text text-transparent">Get In Touch</CardTitle>
                   <CardDescription>
                     Fill out the form below and we'll get back to you within 24 hours.
                   </CardDescription>
