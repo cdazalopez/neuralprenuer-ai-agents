@@ -5,8 +5,11 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock, Instagram } from "lucide-react";
 import { siteConfig, organizationSchema } from "@/lib/seo-data";
+import { useLeadConnectorEmbed } from "@/hooks/use-leadconnector-embed";
 
 const ContactPage = () => {
+  useLeadConnectorEmbed();
+
   const contactSchema = {
     ...organizationSchema,
     "@type": "LocalBusiness",
@@ -46,7 +49,7 @@ const ContactPage = () => {
                 <CardContent className="flex-1">
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                    style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px' }}
+                    style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
                     id="inline-7HpiXRMMtLQH0GtB4pEG"
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"

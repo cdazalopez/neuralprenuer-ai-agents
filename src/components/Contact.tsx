@@ -1,8 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/lib/seo-data";
+import { useLeadConnectorEmbed } from "@/hooks/use-leadconnector-embed";
 
 const Contact = () => {
+  useLeadConnectorEmbed();
+
   return (
     <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-6">
@@ -27,7 +30,7 @@ const Contact = () => {
             <CardContent>
               <iframe
                 src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px' }}
+                style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
                 id="inline-7HpiXRMMtLQH0GtB4pEG"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
