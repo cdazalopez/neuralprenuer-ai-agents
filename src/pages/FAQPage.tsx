@@ -204,7 +204,7 @@ const FAQPage = () => {
       // Contact info
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
-      doc.text("Phone: +1 936.202.9970 | Email: contact@neuralprenuer.com", pageWidth / 2, yPosition, { align: "center" });
+      doc.text("Phone: +1 936.297.4110 | Email: contact@neuralprenuer.com", pageWidth / 2, yPosition, { align: "center" });
       doc.text("Website: neuralprenuer.com", pageWidth / 2, yPosition + 5, { align: "center" });
       yPosition += 20;
 

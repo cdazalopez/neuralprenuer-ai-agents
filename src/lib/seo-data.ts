@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Intelligent Solutions. Real Results.",
   description: "Transform your small business with custom AI agents and intelligent automation. Expert AI consulting, automation, and strategy services.",
   url: "https://neuralprenuer.com",
-  phone: "+1 936.202.9970",
+  phone: "+1 936.297.4110",
   email: "contact@neuralprenuer.com",
   location: "Conroe, TX",
   hours: "Mon - Fri: 9AM - 6PM EST"
