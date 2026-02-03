@@ -34,19 +34,19 @@ const ContactPage = () => {
         
         <section className="py-20 bg-background">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch">
               {/* Contact Form */}
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+              <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full">
                 <CardHeader>
                   <CardTitle className="text-2xl">Get In Touch</CardTitle>
                   <CardDescription>
                     Fill out the form below and we'll get back to you within 24 hours.
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                    style={{ width: '100%', height: '1004px', border: 'none', borderRadius: '3px' }}
+                    style={{ width: '100%', height: '100%', minHeight: '600px', border: 'none', borderRadius: '3px' }}
                     id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
@@ -56,7 +56,7 @@ const ContactPage = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="Free Consult"
-                    data-height="1004"
+                    data-height="600"
                     data-layout-iframe-id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
                     data-form-id="7HpiXRMMtLQH0GtB4pEG"
                     title="Free Consult"
@@ -65,7 +65,7 @@ const ContactPage = () => {
               </Card>
               
               {/* Contact Information */}
-              <div className="space-y-8">
+              <div className="flex flex-col gap-6 h-full justify-between">
                 <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4">
