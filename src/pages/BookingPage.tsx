@@ -3,8 +3,11 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Calendar, Video, Clock, CheckCircle } from "lucide-react";
+import { useLeadConnectorEmbed } from "@/hooks/use-leadconnector-embed";
 
 const BookingPage = () => {
+  useLeadConnectorEmbed();
+
   const benefits = [
     {
       icon: Video,
@@ -72,7 +75,7 @@ const BookingPage = () => {
               <div className="bg-card border border-border rounded-2xl overflow-hidden p-6">
                 <iframe
                   src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                  style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px' }}
+                  style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
                   id="inline-7HpiXRMMtLQH0GtB4pEG"
                   data-layout="{'id':'INLINE'}"
                   data-trigger-type="alwaysShow"
