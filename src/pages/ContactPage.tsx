@@ -3,65 +3,10 @@ import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, MapPin, Clock, Instagram } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { toast } from "@/hooks/use-toast";
 import { siteConfig, organizationSchema } from "@/lib/seo-data";
-import { Link } from "react-router-dom";
-
-type FormData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-  message: string;
-  marketingConsent: boolean;
-  privacyPolicyAccepted: boolean;
-};
 
 const ContactPage = () => {
-  const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
-    defaultValues: {
-      marketingConsent: false,
-      privacyPolicyAccepted: false,
-    }
-  });
-
-  const privacyAccepted = watch("privacyPolicyAccepted");
-
-  const onSubmit = async (data: FormData) => {
-    if (!data.privacyPolicyAccepted) {
-      toast({
-        title: "Required consent missing",
-        description: "Please accept the Privacy Policy to send your message.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
-      });
-      
-      reset();
-    } catch (error) {
-      toast({
-        title: "Error sending message",
-        description: "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    }
-  };
-
   const contactSchema = {
     ...organizationSchema,
     "@type": "LocalBusiness",
@@ -99,119 +44,23 @@ const ContactPage = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input 
-                          id="firstName" 
-                          placeholder="John" 
-                          className="mt-2" 
-                          {...register("firstName", { required: "First name is required" })}
-                        />
-                        {errors.firstName && (
-                          <p className="text-sm text-destructive mt-1">{errors.firstName.message}</p>
-                        )}
-                      </div>
-                      <div>
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input 
-                          id="lastName" 
-                          placeholder="Doe" 
-                          className="mt-2" 
-                          {...register("lastName", { required: "Last name is required" })}
-                        />
-                        {errors.lastName && (
-                          <p className="text-sm text-destructive mt-1">{errors.lastName.message}</p>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="john@company.com" 
-                        className="mt-2" 
-                        {...register("email", { 
-                          required: "Email is required",
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: "Invalid email address"
-                          }
-                        })}
-                      />
-                      {errors.email && (
-                        <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
-                      )}
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="company">Company</Label>
-                      <Input 
-                        id="company" 
-                        placeholder="Your Company Name" 
-                        className="mt-2" 
-                        {...register("company")}
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="message">Message</Label>
-                      <Textarea 
-                        id="message" 
-                        placeholder="Tell us about your business and how we can help with AI implementation..."
-                        className="mt-2 min-h-[120px]"
-                        {...register("message", { required: "Message is required" })}
-                      />
-                      {errors.message && (
-                        <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
-                      )}
-                    </div>
-
-                    {/* Consent Checkboxes */}
-                    <div className="space-y-4 border-t border-border pt-4">
-                      <div className="flex items-start space-x-3">
-                        <Checkbox 
-                          id="marketingConsent"
-                          checked={watch("marketingConsent")}
-                          onCheckedChange={(checked) => setValue("marketingConsent", checked as boolean)}
-                        />
-                        <Label htmlFor="marketingConsent" className="text-sm leading-relaxed cursor-pointer">
-                          I agree to receive marketing communications from {siteConfig.name}. (Optional)
-                        </Label>
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <Checkbox 
-                          id="privacyPolicyAccepted"
-                          checked={privacyAccepted}
-                          onCheckedChange={(checked) => setValue("privacyPolicyAccepted", checked as boolean)}
-                        />
-                        <Label htmlFor="privacyPolicyAccepted" className="text-sm leading-relaxed cursor-pointer">
-                          I have read and agree to the{" "}
-                          <Link to="/privacy-policy" className="text-primary hover:underline" target="_blank">
-                            Privacy Policy
-                          </Link>
-                          . *
-                        </Label>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-muted-foreground">
-                      * Required. By submitting this form, you consent to us processing your data to respond to your inquiry.
-                    </p>
-                    
-                    <Button 
-                      type="submit" 
-                      variant="neural" 
-                      className="w-full" 
-                      disabled={isSubmitting || !privacyAccepted}
-                    >
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </Button>
-                  </form>
+                  <iframe
+                    src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
+                    style={{ width: '100%', height: '1004px', border: 'none', borderRadius: '3px' }}
+                    id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="Free Consult"
+                    data-height="1004"
+                    data-layout-iframe-id="contactpage-inline-7HpiXRMMtLQH0GtB4pEG"
+                    data-form-id="7HpiXRMMtLQH0GtB4pEG"
+                    title="Free Consult"
+                  />
                 </CardContent>
               </Card>
               
