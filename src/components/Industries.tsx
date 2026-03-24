@@ -70,6 +70,7 @@ const Industries = () => {
                         {solution}
                       </li>
                     ))}
+                    <li className="text-sm text-primary font-medium italic mt-1">…and more</li>
                   </ul>
                 </CardContent>
               </Card>
