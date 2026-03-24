@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import Industries from "@/components/Industries";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -26,6 +27,9 @@ const Index = () => {
         </section>
         <section id="services">
           <Services />
+        </section>
+        <section id="industries">
+          <Industries />
         </section>
         <section id="about">
           <About />
