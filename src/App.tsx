@@ -14,6 +14,7 @@ import OptInPage from "./pages/OptInPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import FAQPage from "./pages/FAQPage";
+import InternalAuditPage from "./pages/InternalAuditPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
