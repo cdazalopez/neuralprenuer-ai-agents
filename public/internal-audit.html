@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internal Audit Console | Neuralpreneur AI</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #0f0f0f;
+      --bg-secondary: #1b1b1b;
+      --bg-card: #222222;
+      --bg-input: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #c5c1b9;
+      --text-muted: #888888;
+      --accent: #c5c1b9;
+      --border: #333333;
+      --red: #e74c3c;
+      --orange: #e67e22;
+      --yellow: #f1c40f;
+      --green: #2ecc71;
+      --blue: #3498db;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* LAYOUT */
+    .app { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 280px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .main { flex: 1; overflow-y: auto; }
+
+    @media (max-width: 768px) {
+      .app { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); max-height: 50vh; overflow-y: auto; }
+    }
+
+    /* SIDEBAR */
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header .brand {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .sidebar-header h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .sidebar-section {
+      padding: 12px 16px 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .client-list { flex: 1; overflow-y: auto; padding: 0 8px 8px; }
+    .client-item {
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s;
+      margin-bottom: 2px;
+    }
+    .client-item:hover { background: var(--bg-card); }
+    .client-item.active { background: var(--bg-card); border: 1px solid var(--border); }
+    .client-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg-input); display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 14px; color: var(--accent); flex-shrink: 0;
+    }
+    .client-item .info { flex: 1; min-width: 0; }
+    .client-item .name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .client-item .company { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .client-item .badge {
+      font-size: 11px; font-weight: 600; padding: 2px 8px;
+      border-radius: 10px; flex-shrink: 0;
+    }
+    .add-client-btn {
+      margin: 8px;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .add-client-btn:hover { border-color: var(--accent); }
+
+    /* MAIN CONTENT */
+    .main-content { padding: 24px; max-width: 900px; }
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .main-header h1 { font-size: 22px; font-weight: 600; }
+
+    /* FORMS & INPUTS */
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .form-card h3 { font-size: 16px; margin-bottom: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .field label {
+      display: block; font-size: 12px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px; background: var(--bg-input);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-primary); font-size: 14px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
+    .field input::placeholder, .field textarea::placeholder { color: #555; }
+    .field textarea { resize: vertical; min-height: 100px; font-family: inherit; line-height: 1.5; }
+    .field-full { grid-column: 1 / -1; }
+
+    /* BUTTONS */
+    .btn {
+      padding: 12px 24px; border-radius: 8px; border: none;
+      font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg-primary); }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { background: var(--bg-input); color: var(--text-secondary); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--text-muted); }
+    .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+    .btn-danger:hover { background: rgba(231,76,60,0.1); }
+    .btn-sm { padding: 8px 16px; font-size: 13px; }
+    .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-block { width: 100%; justify-content: center; }
+
+    /* AUDIT FLOW */
+    .progress-strip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .progress-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 8px; font-size: 13px; color: var(--text-muted);
+    }
+    .progress-bar { height: 6px; background: var(--bg-input); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.4s; }
+    .cat-pills {
+      display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .cat-pill {
+      font-size: 12px; padding: 4px 10px; border-radius: 20px;
+      background: var(--bg-input); color: var(--text-muted); white-space: nowrap;
+    }
+    .cat-pill.active { background: var(--accent); color: var(--bg-primary); font-weight: 600; }
+    .cat-pill.done { background: var(--bg-input); color: var(--green); }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .question-card .cat-label {
+      font-size: 12px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .question-card .q-text { font-size: 20px; font-weight: 600; margin-bottom: 24px; line-height: 1.3; }
+    .option {
+      background: var(--bg-input); border: 2px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
+      cursor: pointer; display: flex; align-items: center; gap: 12px;
+      transition: all 0.15s;
+    }
+    .option:hover { border-color: var(--text-muted); }
+    .option.selected { border-color: var(--accent); background: rgba(197,193,185,0.06); }
+    .option-dot {
+      width: 30px; height: 30px; border-radius: 50%; background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; color: var(--text-muted); flex-shrink: 0;
+    }
+    .option.selected .option-dot { background: var(--accent); color: var(--bg-primary); }
+    .option-text { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+    .option.selected .option-text { color: var(--text-primary); }
+
+    .q-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);
+    }
+
+    /* NOTES SECTION */
+    .notes-section {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px; margin-bottom: 20px;
+    }
+    .notes-section h3 { font-size: 16px; margin-bottom: 12px; }
+
+    /* RESULTS */
+    .score-card {
+      text-align: center; background: var(--bg-card);
+      border: 2px solid var(--border); border-radius: 16px;
+      padding: 36px; margin-bottom: 24px;
+    }
+    .score-card .number { font-size: 72px; font-weight: 700; line-height: 1; }
+    .score-card .level { font-size: 22px; font-weight: 600; margin-top: 8px; }
+    .score-card .summary { color: var(--text-secondary); margin-top: 10px; font-size: 14px; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+    .cat-result {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; margin-bottom: 10px;
+    }
+    .cat-result-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+    }
+    .cat-result-header .icon { font-size: 18px; }
+    .cat-result-header .title { flex: 1; font-size: 15px; font-weight: 600; }
+    .cat-result-header .score { font-size: 18px; font-weight: 700; }
+    .cat-result .bar { height: 5px; background: var(--bg-input); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+    .cat-result .bar-fill { height: 100%; border-radius: 3px; }
+    .cat-result .detail-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 5px 0; border-top: 1px solid rgba(255,255,255,0.04);
+      font-size: 12px;
+    }
+    .cat-result .detail-row .dq { flex: 1; color: var(--text-muted); }
+    .cat-result .detail-row .ds {
+      background: var(--bg-input); padding: 2px 8px;
+      border-radius: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px;
+    }
+
+    .reco-box {
+      background: var(--bg-card); border-left: 4px solid var(--blue);
+      border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 20px 0;
+    }
+    .reco-box h3 { color: var(--blue); font-size: 15px; margin-bottom: 6px; }
+    .reco-box p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
+
+    .actions-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+    /* AUDIT HISTORY */
+    .history-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 14px; cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .history-item:hover { border-color: var(--text-muted); }
+    .history-score {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 3px solid; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+    .history-info { flex: 1; }
+    .history-info .hlevel { font-size: 15px; font-weight: 600; }
+    .history-info .hdate { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .history-del { color: var(--text-muted); cursor: pointer; padding: 4px 8px; font-size: 18px; }
+    .history-del:hover { color: var(--red); }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; width: 100%; max-width: 480px;
+      animation: fadeIn 0.2s;
+    }
+    .modal h3 { font-size: 18px; margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+    /* EMPTY */
+    .empty-state {
+      text-align: center; padding: 60px 20px; color: var(--text-muted);
+    }
+    .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 18px; color: var(--text-secondary); margin-bottom: 8px; }
+    .empty-state p { font-size: 14px; max-width: 360px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">Neuralpreneur AI</div>
+        <h2>Audit Console</h2>
+      </div>
+      <div class="sidebar-section">Clients</div>
+      <div class="client-list" id="clientList"></div>
+      <div class="add-client-btn" onclick="showAddClientModal()">+ Add Client</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="main-content" id="mainContent">
+        <!-- Default empty state -->
+        <div class="empty-state" id="emptyState">
+          <div class="icon">📋</div>
+          <h3>AI Readiness Audit Console</h3>
+          <p>Select a client from the sidebar or add a new one to begin conducting audits.</p>
+        </div>
+
+        <!-- Client detail view (hidden by default) -->
+        <div id="clientView" style="display:none;"></div>
+
+        <!-- Audit flow (hidden by default) -->
+        <div id="auditView" style="display:none;"></div>
+
+        <!-- Results view (hidden by default) -->
+        <div id="resultsView" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD/EDIT CLIENT MODAL -->
+  <div class="modal-overlay" id="clientModal">
+    <div class="modal">
+      <h3 id="modalTitle">Add Client</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label>Full Name *</label>
+          <input type="text" id="mName" placeholder="John Smith">
+        </div>
+        <div class="field">
+          <label>Company</label>
+          <input type="text" id="mCompany" placeholder="Acme Corp">
+        </div>
+        <div class="field">
+          <label>Industry</label>
+          <select id="mIndustry">
+            <option value="">Select...</option>
+            <option>Healthcare</option><option>Retail / E-commerce</option>
+            <option>Financial Services</option><option>Manufacturing</option>
+            <option>Real Estate</option><option>Professional Services</option>
+            <option>Restaurant / Hospitality</option><option>Construction</option>
+            <option>Education</option><option>Technology</option>
+            <option>Logistics / Transportation</option><option>Legal</option>
+            <option>Marketing / Advertising</option><option>Nonprofit</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="mEmail" placeholder="john@acme.com">
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" id="mPhone" placeholder="(555) 123-4567">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" style="flex:1;" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="saveClient()">Save Client</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ============================================================
+// AUDIT DATA
+// ============================================================
+const CATEGORIES = [
+  {
+    id:'data', title:'Data Infrastructure', icon:'📊',
+    questions:[
+      {id:'d1',text:'How does the organization currently collect and store business data?',options:[
+        {label:'No structured data collection; mostly paper or informal records',score:1},
+        {label:'Basic digital records (spreadsheets, simple databases)',score:2},
+        {label:'Organized databases with some automation in data entry',score:3},
+        {label:'Centralized data warehouse with automated pipelines',score:4},
+        {label:'Advanced data platform with real-time ingestion, governance, and cataloging',score:5}]},
+      {id:'d2',text:'How would you rate the quality and consistency of their data?',options:[
+        {label:'Data is unreliable, duplicated, or frequently missing',score:1},
+        {label:'Some data quality issues but generally usable',score:2},
+        {label:'Moderate quality with periodic cleanup processes',score:3},
+        {label:'High quality with validation rules and regular audits',score:4},
+        {label:'Excellent \u2014 automated quality checks, deduplication, and lineage tracking',score:5}]},
+      {id:'d3',text:'How accessible is their data to decision-makers across the organization?',options:[
+        {label:'Data is siloed; most people cannot access it',score:1},
+        {label:'Limited access \u2014 requires IT support to pull reports',score:2},
+        {label:'Self-service dashboards available for some departments',score:3},
+        {label:'Broad access with role-based permissions and BI tools',score:4},
+        {label:'Fully democratized with real-time dashboards and API access',score:5}]},
+      {id:'d4',text:'Do they have data privacy and security policies in place?',options:[
+        {label:'No formal policies',score:1},
+        {label:'Basic awareness but no documented policies',score:2},
+        {label:'Written policies, partially enforced',score:3},
+        {label:'Comprehensive policies with regular training',score:4},
+        {label:'Fully compliant framework (GDPR/CCPA) with automated enforcement',score:5}]}
+    ]
+  },
+  {
+    id:'tech', title:'Technology & Tools', icon:'⚙️',
+    questions:[
+      {id:'t1',text:'What best describes their current technology infrastructure?',options:[
+        {label:'Minimal tech \u2014 mostly manual processes',score:1},
+        {label:'Basic tools (email, office suite, simple website)',score:2},
+        {label:'Cloud-based tools and some SaaS platforms',score:3},
+        {label:'Integrated tech stack with APIs and automation',score:4},
+        {label:'Modern cloud-native architecture with microservices and scalable compute',score:5}]},
+      {id:'t2',text:'How integrated are their existing software systems?',options:[
+        {label:'Systems are completely disconnected',score:1},
+        {label:'Some manual data transfer between systems',score:2},
+        {label:'A few key integrations (e.g., CRM to email)',score:3},
+        {label:'Most systems connected via APIs or middleware',score:4},
+        {label:'Fully integrated ecosystem with event-driven architecture',score:5}]},
+      {id:'t3',text:'Do they currently use any AI or automation tools?',options:[
+        {label:'None',score:1},
+        {label:'Basic automation (email autoresponders, simple chatbots)',score:2},
+        {label:'Some AI features within existing tools (e.g., smart recommendations)',score:3},
+        {label:'Dedicated AI/ML tools for specific tasks',score:4},
+        {label:'Multiple AI systems deployed across departments',score:5}]},
+      {id:'t4',text:'How do they handle software updates and IT maintenance?',options:[
+        {label:'No formal process \u2014 things break before they get fixed',score:1},
+        {label:'Reactive maintenance only',score:2},
+        {label:'Scheduled updates with some monitoring',score:3},
+        {label:'Proactive maintenance with monitoring and alerting',score:4},
+        {label:'Automated CI/CD pipelines with proactive monitoring and auto-scaling',score:5}]}
+    ]
+  },
+  {
+    id:'people', title:'People & Skills', icon:'👥',
+    questions:[
+      {id:'p1',text:'What is the overall level of digital literacy in their team?',options:[
+        {label:'Very low \u2014 most staff struggle with basic digital tools',score:1},
+        {label:'Basic \u2014 comfortable with email and simple software',score:2},
+        {label:'Moderate \u2014 can use most business software effectively',score:3},
+        {label:'High \u2014 team is tech-savvy and quick to adopt new tools',score:4},
+        {label:'Advanced \u2014 team includes developers, data analysts, or AI practitioners',score:5}]},
+      {id:'p2',text:'How does the team generally respond to new technology?',options:[
+        {label:'Strong resistance \u2014 prefer traditional methods',score:1},
+        {label:'Cautious \u2014 open but slow to change',score:2},
+        {label:'Mixed \u2014 some champions, some resistors',score:3},
+        {label:'Generally positive \u2014 willing to learn and adapt',score:4},
+        {label:'Enthusiastic \u2014 actively seek and propose new tech solutions',score:5}]},
+      {id:'p3',text:'Does anyone on the team have experience with AI, data science, or automation?',options:[
+        {label:'No one',score:1},
+        {label:'Some awareness but no hands-on experience',score:2},
+        {label:'One or two people with basic experience',score:3},
+        {label:'A dedicated person or small team with relevant skills',score:4},
+        {label:'In-house AI/data team with production experience',score:5}]},
+      {id:'p4',text:'Do they invest in ongoing training and professional development?',options:[
+        {label:'No training programs',score:1},
+        {label:'Occasional ad-hoc training',score:2},
+        {label:'Annual training budget with some structured programs',score:3},
+        {label:'Regular training with personalized learning paths',score:4},
+        {label:'Continuous learning culture with dedicated L&D resources and AI-specific programs',score:5}]}
+    ]
+  },
+  {
+    id:'process', title:'Business Processes', icon:'🔄',
+    questions:[
+      {id:'pr1',text:'How well documented are their core business processes?',options:[
+        {label:'Not documented \u2014 knowledge lives in people\'s heads',score:1},
+        {label:'Some informal documentation',score:2},
+        {label:'Key processes are documented but not always current',score:3},
+        {label:'Well-documented with regular reviews and updates',score:4},
+        {label:'Fully documented with process maps, KPIs, and continuous improvement',score:5}]},
+      {id:'pr2',text:'How much of their workflow involves repetitive, manual tasks?',options:[
+        {label:'Almost everything is manual',score:1},
+        {label:'Most tasks are manual with a few automated steps',score:2},
+        {label:'About half manual, half automated',score:3},
+        {label:'Mostly automated with some manual oversight',score:4},
+        {label:'Highly automated \u2014 manual intervention only for exceptions',score:5}]},
+      {id:'pr3',text:'How do they currently measure business performance?',options:[
+        {label:'No formal measurement \u2014 rely on gut feeling',score:1},
+        {label:'Basic financials tracked (revenue, expenses)',score:2},
+        {label:'Some KPIs tracked across departments',score:3},
+        {label:'Comprehensive KPI dashboards with regular reviews',score:4},
+        {label:'Real-time performance monitoring with predictive analytics',score:5}]},
+      {id:'pr4',text:'How standardized are processes across teams or locations?',options:[
+        {label:'No standardization \u2014 everyone does things differently',score:1},
+        {label:'Minimal standards, mostly informal',score:2},
+        {label:'Some standardized procedures for critical processes',score:3},
+        {label:'Well-standardized with clear SOPs',score:4},
+        {label:'Fully standardized and enforced with quality management systems',score:5}]}
+    ]
+  },
+  {
+    id:'strategy', title:'Strategy & Leadership', icon:'🎯',
+    questions:[
+      {id:'s1',text:'Does their leadership team have a clear vision for how AI can benefit the business?',options:[
+        {label:'No awareness or interest in AI',score:1},
+        {label:'Curious but uninformed about AI possibilities',score:2},
+        {label:'General interest with some ideas but no plan',score:3},
+        {label:'Clear vision with identified use cases',score:4},
+        {label:'Detailed AI strategy aligned with business goals and funded roadmap',score:5}]},
+      {id:'s2',text:'Is there executive sponsorship for AI initiatives?',options:[
+        {label:'No one is championing AI',score:1},
+        {label:'Informal interest from one leader',score:2},
+        {label:'One executive actively exploring AI options',score:3},
+        {label:'Strong executive sponsor with allocated resources',score:4},
+        {label:'C-suite fully committed with AI embedded in company strategy',score:5}]},
+      {id:'s3',text:'What is their budget outlook for AI and technology investment?',options:[
+        {label:'No budget available for new technology',score:1},
+        {label:'Very limited \u2014 could invest a small amount',score:2},
+        {label:'Moderate budget available for strategic investments',score:3},
+        {label:'Dedicated technology budget with room for AI projects',score:4},
+        {label:'Significant AI budget with multi-year commitment',score:5}]},
+      {id:'s4',text:'How does the organization approach innovation and risk?',options:[
+        {label:'Very risk-averse \u2014 avoids change',score:1},
+        {label:'Conservative \u2014 prefers proven solutions only',score:2},
+        {label:'Moderate \u2014 willing to try new things with a safety net',score:3},
+        {label:'Progressive \u2014 actively experiments and iterates',score:4},
+        {label:'Innovation-driven \u2014 fail-fast culture with dedicated R&D',score:5}]}
+    ]
+  },
+  {
+    id:'ethics', title:'Ethics & Governance', icon:'🛡️',
+    questions:[
+      {id:'e1',text:'Does the organization have policies around responsible use of AI or technology?',options:[
+        {label:'No policies in place',score:1},
+        {label:'Basic awareness of ethical concerns',score:2},
+        {label:'Some informal guidelines',score:3},
+        {label:'Written policies covering data use, bias, and transparency',score:4},
+        {label:'Comprehensive AI governance framework with review boards',score:5}]},
+      {id:'e2',text:'How do they handle customer data and consent?',options:[
+        {label:'No formal approach to data consent',score:1},
+        {label:'Basic privacy notice on website',score:2},
+        {label:'Consent collection with some documentation',score:3},
+        {label:'Comprehensive consent management and data rights processes',score:4},
+        {label:'Fully compliant with automated consent tracking, audit trails, and DPO',score:5}]},
+      {id:'e3',text:'How prepared is the organization to address AI bias and fairness?',options:[
+        {label:'No awareness of AI bias issues',score:1},
+        {label:'Some awareness but no action',score:2},
+        {label:'Beginning to consider bias in decision-making',score:3},
+        {label:'Active bias monitoring in existing processes',score:4},
+        {label:'Formal bias testing, fairness metrics, and mitigation procedures',score:5}]},
+      {id:'e4',text:'Do they have a plan for AI transparency with customers and stakeholders?',options:[
+        {label:'Haven\'t considered it',score:1},
+        {label:'Aware it matters but no plan',score:2},
+        {label:'Informal commitment to transparency',score:3},
+        {label:'Clear guidelines on AI disclosure and explainability',score:4},
+        {label:'Published AI transparency reports with explainable AI practices',score:5}]}
+    ]
+  }
+];
+
+const LEVELS = [
+  {min:0,max:20,level:'Foundational',color:'#e74c3c',
+    summary:'Organization is at the beginning of its AI journey.',
+    reco:'Start with digital fundamentals: organize data, upgrade basic technology, and build digital literacy. Recommend our Team Training and AI Strategy Consulting services.'},
+  {min:21,max:40,level:'Emerging',color:'#e67e22',
+    summary:'Some building blocks in place but significant gaps remain.',
+    reco:'Focus on data quality, system integration, and building internal champions. Quick-win automation projects can build momentum. Recommend Process Automation and Rapid Prototyping.'},
+  {min:41,max:60,level:'Developing',color:'#f1c40f',
+    summary:'Moderate foundation for AI adoption.',
+    reco:'Ready for targeted AI implementations. Prioritize high-impact use cases, invest in team upskilling, and start pilot projects. Recommend Agent Development and Predictive Analytics.'},
+  {min:61,max:80,level:'Advanced',color:'#2ecc71',
+    summary:'Strong readiness across most dimensions \u2014 well positioned for AI.',
+    reco:'Scale AI initiatives across departments. Focus on governance, measuring ROI, and building an AI-first culture. Recommend AI Strategy Consulting for enterprise-wide roadmap.'},
+  {min:81,max:100,level:'Leading',color:'#3498db',
+    summary:'Highly prepared and likely already leveraging AI.',
+    reco:'Focus on cutting-edge applications, competitive differentiation through AI, and thought leadership. Recommend advanced Agent Development and custom AI solutions.'}
+];
+
+const allQuestions = [];
+CATEGORIES.forEach(cat => cat.questions.forEach(q => allQuestions.push({...q, category: cat})));
+
+// ============================================================
+// STATE
+// ============================================================
+let clients = JSON.parse(localStorage.getItem('np_clients') || '[]');
+let audits = JSON.parse(localStorage.getItem('np_audits') || '[]');
+let activeClientId = null;
+let editingClientId = null;
+
+// Audit state
+let currentQ = 0;
+let auditAnswers = {};
+let auditNotes = '';
+
+function persist() {
+  localStorage.setItem('np_clients', JSON.stringify(clients));
+  localStorage.setItem('np_audits', JSON.stringify(audits));
+}
+
+function getLevel(pct) { return LEVELS.find(l => pct >= l.min && pct <= l.max) || LEVELS[0]; }
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+function renderSidebar() {
+  const list = document.getElementById('clientList');
+  if (clients.length === 0) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px;">No clients yet</div>';
+    return;
+  }
+  list.innerHTML = clients.sort((a,b) => a.name.localeCompare(b.name)).map(c => {
+    const cAudits = audits.filter(a => a.clientId === c.id);
+    const latest = cAudits.sort((a,b) => b.date - a.date)[0];
+    let badge = '';
+    if (latest) {
+      const pct = calcScore(latest);
+      const lvl = getLevel(pct);
+      badge = `<span class="badge" style="background:${lvl.color}20;color:${lvl.color}">${pct}%</span>`;
+    }
+    return `
+      <div class="client-item ${c.id === activeClientId ? 'active' : ''}" onclick="selectClient('${c.id}')">
+        <div class="client-avatar">${c.name.charAt(0).toUpperCase()}</div>
+        <div class="info">
+          <div class="name">${c.name}</div>
+          <div class="company">${c.company || 'No company'}</div>
+        </div>
+        ${badge}
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// CLIENT MODAL
+// ============================================================
+function showAddClientModal() {
+  editingClientId = null;
+  document.getElementById('modalTitle').textContent = 'Add Client';
+  ['mName','mCompany','mEmail','mPhone'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('mIndustry').value = '';
+  document.getElementById('clientModal').classList.add('show');
+}
+
+function showEditClientModal(id) {
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+  editingClientId = id;
+  document.getElementById('modalTitle').textContent = 'Edit Client';
+  document.getElementById('mName').value = c.name;
+  document.getElementById('mCompany').value = c.company || '';
+  document.getElementById('mEmail').value = c.email || '';
+  document.getElementById('mPhone').value = c.phone || '';
+  document.getElementById('mIndustry').value = c.industry || '';
+  document.getElementById('clientModal').classList.add('show');
+}
+
+function closeModal() { document.getElementById('clientModal').classList.remove('show'); }
+
+function saveClient() {
+  const name = document.getElementById('mName').value.trim();
+  if (!name) { alert('Name is required.'); return; }
+  const data = {
+    name,
+    company: document.getElementById('mCompany').value.trim(),
+    email: document.getElementById('mEmail').value.trim(),
+    phone: document.getElementById('mPhone').value.trim(),
+    industry: document.getElementById('mIndustry').value,
+  };
+  if (editingClientId) {
+    const idx = clients.findIndex(c => c.id === editingClientId);
+    if (idx >= 0) clients[idx] = { ...clients[idx], ...data };
+  } else {
+    clients.push({ id: Date.now().toString(), ...data, createdAt: Date.now() });
+  }
+  persist();
+  closeModal();
+  renderSidebar();
+  if (editingClientId && editingClientId === activeClientId) selectClient(activeClientId);
+}
+
+function deleteClient(id) {
+  if (!confirm('Delete this client and all their audits?')) return;
+  clients = clients.filter(c => c.id !== id);
+  audits = audits.filter(a => a.clientId !== id);
+  persist();
+  activeClientId = null;
+  renderSidebar();
+  hideAllViews();
+  document.getElementById('emptyState').style.display = 'block';
+}
+
+// ============================================================
+// CLIENT DETAIL VIEW
+// ============================================================
+function selectClient(id) {
+  activeClientId = id;
+  renderSidebar();
+  showClientView();
+}
+
+function hideAllViews() {
+  ['emptyState','clientView','auditView','resultsView'].forEach(id =>
+    document.getElementById(id).style.display = 'none'
+  );
+}
+
+function showClientView() {
+  hideAllViews();
+  const c = clients.find(x => x.id === activeClientId);
+  if (!c) return;
+  const cAudits = audits.filter(a => a.clientId === c.id).sort((a,b) => b.date - a.date);
+
+  let historyHTML = '';
+  if (cAudits.length > 0) {
+    historyHTML = cAudits.map(a => {
+      const pct = calcScore(a);
+      const lvl = getLevel(pct);
+      return `
+        <div class="history-item" onclick="viewAuditResults('${a.id}')">
+          <div class="history-score" style="border-color:${lvl.color};color:${lvl.color}">${pct}%</div>
+          <div class="history-info">
+            <div class="hlevel">${lvl.level}</div>
+            <div class="hdate">${new Date(a.date).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</div>
+          </div>
+          <div class="history-del" onclick="event.stopPropagation();deleteAudit('${a.id}')" title="Delete">&times;</div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    historyHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:14px;">No audits yet. Start one below.</div>';
+  }
+
+  document.getElementById('clientView').innerHTML = `
+    <div class="main-header">
+      <h1>${c.name}</h1>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-secondary btn-sm" onclick="showEditClientModal('${c.id}')">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteClient('${c.id}')">Delete</button>
+      </div>
+    </div>
+    <div class="form-card" style="padding:16px 20px;">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:14px;">
+        ${c.company ? `<div><span style="color:var(--text-muted);font-size:12px;">Company</span><br>${c.company}</div>` : ''}
+        ${c.industry ? `<div><span style="color:var(--text-muted);font-size:12px;">Industry</span><br>${c.industry}</div>` : ''}
+        ${c.email ? `<div><span style="color:var(--text-muted);font-size:12px;">Email</span><br>${c.email}</div>` : ''}
+        ${c.phone ? `<div><span style="color:var(--text-muted);font-size:12px;">Phone</span><br>${c.phone}</div>` : ''}
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <h2 style="font-size:17px;">Audit History</h2>
+      <span style="font-size:13px;color:var(--text-muted);">${cAudits.length} audit${cAudits.length !== 1 ? 's' : ''}</span>
+    </div>
+    ${historyHTML}
+    <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="startAudit()">
+      Start New Audit
+    </button>
+  `;
+  document.getElementById('clientView').style.display = 'block';
+}
+
+function deleteAudit(id) {
+  if (!confirm('Delete this audit?')) return;
+  audits = audits.filter(a => a.id !== id);
+  persist();
+  renderSidebar();
+  showClientView();
+}
+
+// ============================================================
+// AUDIT FLOW
+// ============================================================
+function startAudit() {
+  currentQ = 0;
+  auditAnswers = {};
+  auditNotes = '';
+  hideAllViews();
+  renderAuditQuestion();
+  document.getElementById('auditView').style.display = 'block';
+}
+
+function renderAuditQuestion() {
+  const q = allQuestions[currentQ];
+  const catIdx = CATEGORIES.findIndex(c => c.id === q.category.id);
+  const pct = ((currentQ + 1) / allQuestions.length) * 100;
+
+  const pills = CATEGORIES.map((c, i) => {
+    let cls = 'cat-pill';
+    if (i === catIdx) cls += ' active';
+    else if (i < catIdx) cls += ' done';
+    return `<span class="${cls}">${c.icon} ${c.title}</span>`;
+  }).join('');
+
+  const options = q.options.map((opt, i) => `
+    <div class="option ${auditAnswers[q.id]?.score === opt.score ? 'selected' : ''}" onclick="pickAnswer('${q.id}',${i})">
+      <div class="option-dot">${opt.score}</div>
+      <div class="option-text">${opt.label}</div>
+    </div>
+  `).join('');
+
+  const isLast = currentQ === allQuestions.length - 1;
+
+  document.getElementById('auditView').innerHTML = `
+    <div class="main-header">
+      <h1>Auditing: ${clients.find(c=>c.id===activeClientId)?.name}</h1>
+      <button class="btn btn-secondary btn-sm" onclick="confirmExitAudit()">Exit</button>
+    </div>
+    <div class="progress-strip">
+      <div class="progress-top">
+        <span>${q.category.icon} ${q.category.title}</span>
+        <span>${currentQ + 1} / ${allQuestions.length}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="cat-pills">${pills}</div>
+    </div>
+    <div class="question-card">
+      <div class="cat-label">${q.category.icon} ${q.category.title}</div>
+      <div class="q-text">${q.text}</div>
+      ${options}
+      <div class="q-nav">
+        <button class="btn btn-secondary" onclick="auditPrev()" ${currentQ===0?'disabled':''}>← Previous</button>
+        ${auditAnswers[q.id] ? (isLast ?
+          '<button class="btn btn-primary" onclick="showAuditNotes()">Add Notes & Finish →</button>' :
+          '<button class="btn btn-primary" onclick="auditNext()">Next →</button>') :
+          '<button class="btn btn-primary" disabled>Select an answer</button>'}
+      </div>
+    </div>
+  `;
+}
+
+function pickAnswer(qId, optIdx) {
+  const q = allQuestions[currentQ];
+  auditAnswers[qId] = q.options[optIdx];
+  renderAuditQuestion();
+  setTimeout(() => {
+    if (currentQ < allQuestions.length - 1) { currentQ++; renderAuditQuestion(); }
+  }, 300);
+}
+
+function auditPrev() { if (currentQ > 0) { currentQ--; renderAuditQuestion(); } }
+function auditNext() { if (currentQ < allQuestions.length - 1) { currentQ++; renderAuditQuestion(); } }
+
+function confirmExitAudit() {
+  if (Object.keys(auditAnswers).length > 0) {
+    if (!confirm('Exit audit? Progress will be lost.')) return;
+  }
+  showClientView();
+}
+
+function showAuditNotes() {
+  const client = clients.find(c => c.id === activeClientId);
+  document.getElementById('auditView').innerHTML = `
+    <div class="main-header"><h1>Auditor Notes</h1></div>
+    <div class="notes-section">
+      <h3>Add observations or recommendations (optional)</h3>
+      <div class="field">
+        <textarea id="auditNotesInput" placeholder="e.g., Client showed strong interest in automating customer service. Main bottleneck is data quality — recommend starting with data cleanup initiative...">${auditNotes}</textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-secondary" style="flex:1;" onclick="auditNotes=document.getElementById('auditNotesInput').value;currentQ=allQuestions.length-1;renderAuditQuestion();">← Back to Questions</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="finishAudit()">Complete Audit & View Results</button>
+    </div>
+  `;
+}
+
+function finishAudit() {
+  auditNotes = document.getElementById('auditNotesInput')?.value || auditNotes;
+  const audit = {
+    id: Date.now().toString(),
+    clientId: activeClientId,
+    answers: auditAnswers,
+    notes: auditNotes.trim(),
+    date: Date.now(),
+    auditorName: 'Neuralpreneur AI'
+  };
+  audits.push(audit);
+  persist();
+  renderSidebar();
+  viewAuditResults(audit.id);
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function calcScore(audit) {
+  const total = Object.values(audit.answers).reduce((s,a) => s + a.score, 0);
+  return Math.round((total / (allQuestions.length * 5)) * 100);
+}
+
+function viewAuditResults(auditId) {
+  hideAllViews();
+  const audit = audits.find(a => a.id === auditId);
+  if (!audit) return;
+  const client = clients.find(c => c.id === audit.clientId);
+  const pct = calcScore(audit);
+  const level = getLevel(pct);
+
+  const catCards = CATEGORIES.map(cat => {
+    const catQs = cat.questions;
+    const catScore = catQs.reduce((s,q) => s + (audit.answers[q.id]?.score || 0), 0);
+    const catPct = Math.round((catScore / (catQs.length * 5)) * 100);
+    const cl = getLevel(catPct);
+    const details = catQs.map(q => {
+      const a = audit.answers[q.id];
+      return a ? `<div class="detail-row"><span class="dq">${q.text}</span><span class="ds">${a.score}/5</span></div>` : '';
+    }).join('');
+    return `
+      <div class="cat-result">
+        <div class="cat-result-header">
+          <span class="icon">${cat.icon}</span>
+          <span class="title">${cat.title}</span>
+          <span class="score" style="color:${cl.color}">${catPct}%</span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:${catPct}%;background:${cl.color}"></div></div>
+        ${details}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('resultsView').innerHTML = `
+    <div class="main-header">
+      <h1>Results: ${client?.name || 'Unknown'}</h1>
+      <button class="btn btn-secondary btn-sm" onclick="showClientView()">← Back to Client</button>
+    </div>
+    <div class="score-card" style="border-color:${level.color}">
+      <div style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">AI Readiness Score</div>
+      <div class="number" style="color:${level.color}">${pct}%</div>
+      <div class="level" style="color:${level.color}">${level.level}</div>
+      <div class="summary">${level.summary}</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:12px;">
+        ${new Date(audit.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+      </div>
+    </div>
+    <h2 style="font-size:17px;margin-bottom:12px;">Category Breakdown</h2>
+    ${catCards}
+    <div class="reco-box">
+      <h3>Recommendation</h3>
+      <p>${level.reco}</p>
+    </div>
+    ${audit.notes ? `
+      <div class="reco-box" style="border-left-color:var(--orange);">
+        <h3 style="color:var(--orange);">Auditor Notes</h3>
+        <p>${audit.notes}</p>
+      </div>
+    ` : ''}
+    <div class="actions-row">
+      <button class="btn btn-primary" onclick="exportPDF('${audit.id}')">📄 Export PDF Report</button>
+      <button class="btn btn-secondary" onclick="showClientView()">← Back to Client</button>
+    </div>
+  `;
+  document.getElementById('resultsView').style.display = 'block';
+}
+
+// ============================================================
+// PDF EXPORT
+// ============================================================
+function exportPDF(auditId) {
+  const audit = audits.find(a => a.id === auditId);
+  if (!audit) return;
+  const client = clients.find(c => c.id === audit.clientId);
+  const pct = calcScore(audit);
+  const level = getLevel(pct);
+
+  const catHTML = CATEGORIES.map(cat => {
+    const catQs = cat.questions;
+    const catScore = catQs.reduce((s,q) => s + (audit.answers[q.id]?.score || 0), 0);
+    const catPct = Math.round((catScore / (catQs.length * 5)) * 100);
+    const cl = getLevel(catPct);
+    const rows = catQs.map(q => {
+      const a = audit.answers[q.id];
+      return a ? `<tr><td style="padding:6px 8px;font-size:12px;color:#555;border-bottom:1px solid #f0f0f0;">${q.text}</td><td style="padding:6px 8px;text-align:center;font-weight:600;border-bottom:1px solid #f0f0f0;">${a.score}/5</td></tr>` : '';
+    }).join('');
+    return `
+      <div style="border:1px solid #e0e0e0;border-radius:8px;padding:16px;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;margin-bottom:8px;">
+          <span style="font-size:18px;margin-right:8px;">${cat.icon}</span>
+          <strong style="flex:1;font-size:15px;">${cat.title}</strong>
+          <span style="font-size:18px;font-weight:700;color:${cl.color};">${catPct}%</span>
+        </div>
+        <div style="height:6px;background:#eee;border-radius:3px;margin-bottom:12px;">
+          <div style="height:100%;width:${catPct}%;background:${cl.color};border-radius:3px;"></div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;">${rows}</table>
+      </div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    body{font-family:Helvetica,Arial,sans-serif;color:#333;padding:32px;margin:0;}
+  </style></head><body>
+    <div style="background:#1b1b1b;color:#c5c1b9;padding:24px;border-radius:8px;margin-bottom:24px;">
+      <h1 style="margin:0;font-size:22px;color:#fff;">AI Readiness Audit Report</h1>
+      <p style="margin:4px 0 0;font-size:14px;">${client?.company || client?.name || 'Client'}</p>
+      <p style="margin:10px 0 0;font-size:11px;color:#888;">Prepared by Neuralpreneur AI | www.neuralprenuer.com</p>
+    </div>
+    <div style="display:flex;justify-content:space-around;background:#f8f8f8;border-radius:8px;padding:14px;margin-bottom:24px;font-size:13px;">
+      <div style="text-align:center;"><div style="color:#888;font-size:10px;text-transform:uppercase;">Client</div><strong>${client?.name||'N/A'}</strong></div>
+      <div style="text-align:center;"><div style="color:#888;font-size:10px;text-transform:uppercase;">Industry</div><strong>${client?.industry||'N/A'}</strong></div>
+      <div style="text-align:center;"><div style="color:#888;font-size:10px;text-transform:uppercase;">Date</div><strong>${new Date(audit.date).toLocaleDateString()}</strong></div>
+      <div style="text-align:center;"><div style="color:#888;font-size:10px;text-transform:uppercase;">Auditor</div><strong>${audit.auditorName||'Neuralpreneur AI'}</strong></div>
+    </div>
+    <div style="text-align:center;border:2px solid ${level.color};border-radius:12px;padding:28px;margin-bottom:24px;">
+      <div style="font-size:56px;font-weight:700;color:${level.color};">${pct}%</div>
+      <div style="font-size:20px;font-weight:600;color:${level.color};margin-top:4px;">${level.level}</div>
+      <div style="font-size:13px;color:#666;margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto;">${level.summary}</div>
+    </div>
+    <h2 style="font-size:16px;margin-bottom:12px;">Category Breakdown</h2>
+    ${catHTML}
+    <div style="background:#f0f7ff;border:1px solid #c8e0ff;border-radius:8px;padding:16px;margin-top:20px;">
+      <h3 style="color:#1a5fa6;margin:0 0 8px;font-size:15px;">Recommendation</h3>
+      <p style="font-size:13px;color:#444;line-height:1.5;margin:0;">${level.reco}</p>
+    </div>
+    ${audit.notes ? `
+      <div style="background:#fff8f0;border:1px solid #ffe0b2;border-radius:8px;padding:16px;margin-top:14px;">
+        <h3 style="color:#e67e22;margin:0 0 8px;font-size:15px;">Auditor Notes</h3>
+        <p style="font-size:13px;color:#444;line-height:1.5;margin:0;">${audit.notes}</p>
+      </div>` : ''}
+    <div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #eee;color:#999;font-size:11px;">
+      <p>Neuralpreneur AI | Empowering small business owners to harness the power of AI</p>
+      <p>contact@neuralprenuer.com | (936) 202-9970 | Conroe, TX</p>
+      <p style="margin-top:6px;">This report is confidential and intended solely for the named recipient.</p>
+    </div>
+  </body></html>`;
+
+  const w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+  w.onload = () => w.print();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderSidebar();
+</script>
+</body>
+</html>
