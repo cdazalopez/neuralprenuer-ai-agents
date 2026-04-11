@@ -30,9 +30,6 @@ const Hero = () => {
           />
         </div>
         
-        <p className="text-2xl md:text-3xl font-light italic mb-8 text-muted-foreground">
-          Intelligent Solutions. Real Results.
-        </p>
         
         <p className="text-lg md:text-xl mb-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           Empowering small businesses with custom AI agents and intelligent automation 
