@@ -6,9 +6,9 @@ const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 // Allowed origins for CORS - restrict to actual domains
 const ALLOWED_ORIGINS = [
-  'https://neuralprenuer.com',
-  'https://www.neuralprenuer.com',
-  'https://neuralprenuer-ai-agents.lovable.app',
+  'https://neuralpreneur.com',
+  'https://www.neuralpreneur.com',
+  'https://neuralpreneur-ai-agents.lovable.app',
   'https://id-preview--6adb47e2-1722-45bf-82c3-fcb66d2669a5.lovable.app',
 ];
 
@@ -94,7 +94,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const emailResponse = await resend.emails.send({
-      from: "NeuralPreneur <contact@updates.neuralprenuer.com>",
+      from: "NeuralPreneur <contact@updates.neuralpreneur.com>",
       to: [email],
       subject: "Welcome to NeuralPreneur AI Insights!",
       html: `

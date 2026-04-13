@@ -11,7 +11,7 @@ const TermsOfServicePage = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title={`Terms of Service | ${siteConfig.name}`}
-        description="Terms of Service for Neuralprenuer AI. Read our terms and conditions for using our website and services."
+        description="Terms of Service for Neuralpreneur AI. Read our terms and conditions for using our website and services."
         canonical={`${siteConfig.url}/terms-of-service`}
         keywords="terms of service, terms and conditions, user agreement, legal terms"
       />

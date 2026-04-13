@@ -20,7 +20,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title={`Contact Us | ${siteConfig.name}`}
-        description="Get in touch with Neuralprenuer AI for a free consultation. Let us help transform your business with custom AI solutions."
+        description="Get in touch with Neuralpreneur AI for a free consultation. Let us help transform your business with custom AI solutions."
         canonical={`${siteConfig.url}/contact`}
         keywords="contact AI consulting, AI consultation, get in touch, small business AI help"
         structuredData={contactSchema}
@@ -144,7 +144,7 @@ const ContactPage = () => {
                       <p className="text-sm text-muted-foreground mb-4">Follow us on social media</p>
                       <div className="flex gap-4">
                         <a 
-                          href="https://x.com/neuralprenuer" 
+                          href="https://x.com/neuralpreneur" 
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-14 h-14 bg-secondary/80 rounded-xl flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group border border-border/50 hover:border-primary/50"
@@ -155,7 +155,7 @@ const ContactPage = () => {
                           </svg>
                         </a>
                         <a 
-                          href="https://www.instagram.com/neuralprenuer.ai/" 
+                          href="https://www.instagram.com/neuralpreneur.ai/" 
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-14 h-14 bg-secondary/80 rounded-xl flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 group border border-border/50 hover:border-primary/50"

@@ -15,7 +15,7 @@ const SEO = ({
   description, 
   canonical, 
   type = "website",
-  image = "https://neuralprenuer.com/og-image.png",
+  image = "https://neuralpreneur.com/og-image.png",
   keywords,
   structuredData
 }: SEOProps) => {

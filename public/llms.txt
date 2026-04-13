@@ -1,8 +1,8 @@
-# Neuralprenuer AI - LLM-Readable Content
-# https://neuralprenuer.com
+# Neuralpreneur AI - LLM-Readable Content
+# https://neuralpreneur.com
 
 ## About
-Neuralprenuer AI is an AI consulting and agent design firm for small businesses based in Conroe, TX. We empower small business owners to harness the power of AI through custom agent development and strategic automation.
+Neuralpreneur AI is an AI consulting and agent design firm for small businesses based in Conroe, TX. We empower small business owners to harness the power of AI through custom agent development and strategic automation.
 
 ## Hero
 Headline: AI Solutions for Small Business Success
@@ -59,26 +59,26 @@ Fast AI proof-of-concepts to validate ideas and demonstrate ROI before full impl
 - Results-Driven: We measure success by your business outcomes
 
 ## Contact Information
-- Email: contact@neuralprenuer.com
+- Email: contact@neuralpreneur.com
 - Phone: +1 (936) 202-9970
 - Location: Conroe, TX, USA
 - Hours: Monday-Friday, 9 AM - 5 PM CST
 
 ## Social Media
-- X (Twitter): @neuralprenuer
-- Instagram: @neuralprenuer.ai
+- X (Twitter): @neuralpreneur
+- Instagram: @neuralpreneur.ai
 
 ## Website Navigation
-- Home: https://neuralprenuer.com/
-- Services: https://neuralprenuer.com/services
-- About: https://neuralprenuer.com/about
-- Technologies: https://neuralprenuer.com/technologies
-- Contact: https://neuralprenuer.com/contact
-- Book Consultation: https://neuralprenuer.com/booking
+- Home: https://neuralpreneur.com/
+- Services: https://neuralpreneur.com/services
+- About: https://neuralpreneur.com/about
+- Technologies: https://neuralpreneur.com/technologies
+- Contact: https://neuralpreneur.com/contact
+- Book Consultation: https://neuralpreneur.com/booking
 
 ## Legal
-- Privacy Policy: https://neuralprenuer.com/privacy-policy
-- Terms of Service: https://neuralprenuer.com/terms-of-service
+- Privacy Policy: https://neuralpreneur.com/privacy-policy
+- Terms of Service: https://neuralpreneur.com/terms-of-service
 
 ---
 Last Updated: 2025-01-20

@@ -11,7 +11,7 @@ const PrivacyPolicyPage = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title={`Privacy Policy | ${siteConfig.name}`}
-        description="Privacy Policy for Neuralprenuer AI. Learn how we collect, use, and protect your personal information."
+        description="Privacy Policy for Neuralpreneur AI. Learn how we collect, use, and protect your personal information."
         canonical={`${siteConfig.url}/privacy-policy`}
         keywords="privacy policy, data protection, personal information, CCPA, privacy rights"
       />
