@@ -96,7 +96,7 @@ const Footer = () => {
         
         <div className="border-t border-border/50 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
-            <p>&copy; {new Date().getFullYear()} NeurapreneurAI. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} NeuralpreneurAI. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link to="/privacy-policy" className="hover:text-primary transition-colors">
                 Privacy Policy
