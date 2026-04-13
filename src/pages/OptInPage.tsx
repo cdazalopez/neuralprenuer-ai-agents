@@ -106,7 +106,7 @@ const OptInPage = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title={`Join Our Community | ${siteConfig.name}`}
-        description="Subscribe to receive exclusive AI insights, tips, and updates from Neuralprenuer AI. Stay ahead with the latest in AI automation."
+        description="Subscribe to receive exclusive AI insights, tips, and updates from Neuralpreneur AI. Stay ahead with the latest in AI automation."
         canonical={`${siteConfig.url}/opt-in`}
         keywords="AI newsletter, AI updates, subscribe, AI insights, automation tips"
       />

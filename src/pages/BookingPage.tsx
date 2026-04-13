@@ -29,9 +29,9 @@ const BookingPage = () => {
   return (
     <>
       <SEO
-        title="Book a Demo | Neuralprenuer AI Agents"
+        title="Book a Demo | Neuralpreneur AI Agents"
         description="Schedule a free 30-minute demo call to discover how AI agents can transform your business operations. Book directly with Microsoft Teams integration."
-        canonical="https://neuralprenuer-ai-agents.lovable.app/booking"
+        canonical="https://neuralpreneur-ai-agents.lovable.app/booking"
         keywords="book demo, AI consultation, schedule meeting, Microsoft Teams, AI agents demo"
       />
       <div className="min-h-screen bg-background">

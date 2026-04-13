@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, Bot, Lightbulb, Settings, TrendingUp, Users, Zap, Calendar } from "lucide-react";
-import logo from "@/assets/neuralprenuer-logo.png";
+import logo from "@/assets/neuralpreneur-logo.png";
 import { servicesData } from "@/lib/seo-data";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -38,7 +38,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Neuralprenuer AI" className="h-14 w-auto object-contain" />
+            <img src={logo} alt="Neuralpreneur AI" className="h-14 w-auto object-contain" />
           </Link>
           
           {/* Desktop Navigation Links */}

@@ -1,10 +1,10 @@
 export const siteConfig = {
-  name: "Neuralprenuer AI",
+  name: "Neuralpreneur AI",
   tagline: "Intelligent Solutions. Real Results.",
   description: "Transform your small business with custom AI agents and intelligent automation. Expert AI consulting, automation, and strategy services.",
-  url: "https://neuralprenuer.com",
+  url: "https://neuralpreneur.com",
   phone: "+1 936.202.9970",
-  email: "contact@neuralprenuer.com",
+  email: "contact@neuralpreneur.com",
   location: "Conroe, TX",
   hours: "Mon - Fri: 9AM - 6PM EST"
 };
@@ -15,7 +15,7 @@ export const organizationSchema = {
   "name": siteConfig.name,
   "description": siteConfig.description,
   "url": siteConfig.url,
-  "logo": `${siteConfig.url}/neuralprenuer-logo.svg`,
+  "logo": `${siteConfig.url}/neuralpreneur-logo.svg`,
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": siteConfig.phone,

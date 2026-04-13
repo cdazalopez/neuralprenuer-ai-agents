@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
-import logo from "@/assets/neuralprenuer-logo.png";
+import logo from "@/assets/neuralpreneur-logo.png";
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
         <div className="flex justify-center mb-8">
           <img 
             src={logo} 
-            alt="Neuralprenuer AI - Intelligent Solutions. Real Results." 
+            alt="Neuralpreneur AI - Intelligent Solutions. Real Results." 
             className="w-72 md:w-96 h-auto"
           />
         </div>

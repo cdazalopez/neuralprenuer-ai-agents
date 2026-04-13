@@ -33,11 +33,11 @@ const faqCategories: FAQCategory[] = [
     icon: Briefcase,
     questions: [
       {
-        question: "What is Neuralprenuer AI?",
-        answer: "Neuralprenuer AI is an AI consulting and agent design firm specifically focused on helping small businesses harness the power of artificial intelligence. We provide practical, results-driven AI solutions that transform operations and drive sustainable growth."
+        question: "What is Neuralpreneur AI?",
+        answer: "Neuralpreneur AI is an AI consulting and agent design firm specifically focused on helping small businesses harness the power of artificial intelligence. We provide practical, results-driven AI solutions that transform operations and drive sustainable growth."
       },
       {
-        question: "Where is Neuralprenuer AI located?",
+        question: "Where is Neuralpreneur AI located?",
         answer: "We are based in Conroe, Texas, but we serve clients nationwide through virtual consultations and remote implementation."
       },
       {
@@ -56,7 +56,7 @@ const faqCategories: FAQCategory[] = [
     icon: Cpu,
     questions: [
       {
-        question: "What services does Neuralprenuer AI offer?",
+        question: "What services does Neuralpreneur AI offer?",
         answer: "We offer six core AI services: AI Agent Development (custom AI assistants), AI Strategy Consulting (comprehensive roadmaps), Process Automation (streamlining operations), Predictive Analytics (data-driven insights), AI Team Training (employee empowerment), and Rapid Prototyping (quick proof-of-concept development)."
       },
       {
@@ -163,7 +163,7 @@ const faqCategories: FAQCategory[] = [
     icon: Rocket,
     questions: [
       {
-        question: "How do I get started with Neuralprenuer AI?",
+        question: "How do I get started with Neuralpreneur AI?",
         answer: "Getting started is easy: Book a Free Consultation through our website, tell us about your business challenges and goals, receive a custom proposal tailored to your needs, and begin your AI transformation journey."
       },
       {
@@ -194,7 +194,7 @@ const FAQPage = () => {
       // Title
       doc.setFontSize(24);
       doc.setFont("helvetica", "bold");
-      doc.text("Neuralprenuer AI", pageWidth / 2, yPosition, { align: "center" });
+      doc.text("Neuralpreneur AI", pageWidth / 2, yPosition, { align: "center" });
       yPosition += 10;
       
       doc.setFontSize(16);
@@ -204,8 +204,8 @@ const FAQPage = () => {
       // Contact info
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
-      doc.text("Phone: +1 936.202.9970 | Email: contact@neuralprenuer.com", pageWidth / 2, yPosition, { align: "center" });
-      doc.text("Website: neuralprenuer.com", pageWidth / 2, yPosition + 5, { align: "center" });
+      doc.text("Phone: +1 936.202.9970 | Email: contact@neuralpreneur.com", pageWidth / 2, yPosition, { align: "center" });
+      doc.text("Website: neuralpreneur.com", pageWidth / 2, yPosition + 5, { align: "center" });
       yPosition += 20;
 
       // Loop through categories
@@ -264,7 +264,7 @@ const FAQPage = () => {
         );
       }
 
-      doc.save("Neuralprenuer-AI-FAQ.pdf");
+      doc.save("Neuralpreneur-AI-FAQ.pdf");
     } catch (error) {
       console.error("Error generating PDF:", error);
     } finally {
@@ -290,9 +290,9 @@ const FAQPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Frequently Asked Questions | Neuralprenuer AI"
+        title="Frequently Asked Questions | Neuralpreneur AI"
         description="Find answers to common questions about our AI consulting services, pricing, process, and how we help small businesses succeed with artificial intelligence."
-        canonical="https://neuralprenuer.com/faq"
+        canonical="https://neuralpreneur.com/faq"
         structuredData={faqSchema}
       />
       <Navigation />

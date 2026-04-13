@@ -16,7 +16,7 @@ const TechnologiesPage = () => {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "AI Technologies",
-    "description": "Comprehensive list of AI technologies used by Neuralprenuer AI",
+    "description": "Comprehensive list of AI technologies used by Neuralpreneur AI",
     "numberOfItems": allTechnologies.length,
     "itemListElement": allTechnologies.map((tech, index) => ({
       "@type": "ListItem",

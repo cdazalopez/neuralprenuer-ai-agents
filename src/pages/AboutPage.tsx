@@ -43,9 +43,9 @@ const AboutPage = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title={`About Us | ${siteConfig.name}`}
-        description="Learn about Neuralprenuer AI - your trusted partner in AI consulting and agent design for small businesses. Discover our mission, values, and expertise."
+        description="Learn about Neuralpreneur AI - your trusted partner in AI consulting and agent design for small businesses. Discover our mission, values, and expertise."
         canonical={`${siteConfig.url}/about`}
-        keywords="AI consulting company, about Neuralprenuer AI, AI experts, small business technology partner"
+        keywords="AI consulting company, about Neuralpreneur AI, AI experts, small business technology partner"
         structuredData={organizationSchema}
       />
       
@@ -64,7 +64,7 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Why Choose <span className="bg-gradient-neural bg-clip-text text-transparent">Neuralprenuer AI</span>?
+                  Why Choose <span className="bg-gradient-neural bg-clip-text text-transparent">Neuralpreneur AI</span>?
                 </h2>
                 <p className="text-lg italic text-primary mb-4">
                   {siteConfig.tagline}

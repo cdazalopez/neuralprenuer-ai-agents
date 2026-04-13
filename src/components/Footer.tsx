@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, Instagram } from "lucide-react";
-import logo from "@/assets/neuralprenuer-logo.png";
+import logo from "@/assets/neuralpreneur-logo.png";
 import { siteConfig } from "@/lib/seo-data";
 
 const Footer = () => {
@@ -19,7 +19,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <img src={logo} alt="Neuralprenuer AI" className="h-32 w-auto object-contain" />
+              <img src={logo} alt="Neuralpreneur AI" className="h-32 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
               Empowering small businesses with custom AI agents and intelligent automation 
@@ -27,7 +27,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://x.com/neuralprenuer" 
+                href="https://x.com/neuralpreneur" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 cursor-pointer group"
@@ -38,7 +38,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://www.instagram.com/neuralprenuer.ai/" 
+                href="https://www.instagram.com/neuralpreneur.ai/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-gradient-neural hover:shadow-glow-neural transition-all duration-300 cursor-pointer group"
@@ -96,7 +96,7 @@ const Footer = () => {
         
         <div className="border-t border-border/50 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
-            <p>&copy; {new Date().getFullYear()} NeuralprenuerAI. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} NeurapreneurAI. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link to="/privacy-policy" className="hover:text-primary transition-colors">
                 Privacy Policy
