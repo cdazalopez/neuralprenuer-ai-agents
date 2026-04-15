@@ -74,21 +74,11 @@ const BookingPage = () => {
             <div className="max-w-4xl mx-auto">
               <div className="bg-card border border-border rounded-2xl overflow-hidden p-6">
                 <iframe
-                  src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                  style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
-                  id="inline-7HpiXRMMtLQH0GtB4pEG"
-                  data-layout="{'id':'INLINE'}"
-                  data-trigger-type="alwaysShow"
-                  data-trigger-value=""
-                  data-activation-type="alwaysActivated"
-                  data-activation-value=""
-                  data-deactivation-type="neverDeactivate"
-                  data-deactivation-value=""
-                  data-form-name="Free Consult"
-                  data-height="1100"
-                  data-layout-iframe-id="inline-7HpiXRMMtLQH0GtB4pEG"
-                  data-form-id="7HpiXRMMtLQH0GtB4pEG"
-                  title="Free Consult"
+                  src="https://api.leadconnectorhq.com/widget/booking/bRTPfumxS3ImA9tm2U33"
+                  style={{ width: '100%', height: '1100px', border: 'none', overflow: 'hidden' }}
+                  scrolling="no"
+                  id="bRTPfumxS3ImA9tm2U33_1776262243472"
+                  title="Book a Consultation"
                 />
               </div>
             </div>
