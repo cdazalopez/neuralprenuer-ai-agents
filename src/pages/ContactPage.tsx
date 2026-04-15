@@ -68,7 +68,7 @@ const ContactPage = () => {
               </Card>
               
               {/* Contact Information */}
-              <div className="flex flex-col h-full lg:min-h-[1100px]">
+              <div className="flex flex-col h-full lg:min-h-[800px]">
                 {/* Main Info Card */}
                 <Card className="border-border/50 bg-gradient-to-br from-card via-card to-secondary/30 backdrop-blur-sm flex-1">
                   <CardContent className="p-8 flex flex-col h-full">
