@@ -15,6 +15,8 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import FAQPage from "./pages/FAQPage";
 import InternalAuditPage from "./pages/InternalAuditPage";
+import MedicalPage from "./pages/MedicalPage";
+import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/medical" element={<MedicalPage />} />
+          <Route path="/legal" element={<LegalPage />} />
           <Route path="/internal-audit" element={<InternalAuditPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
