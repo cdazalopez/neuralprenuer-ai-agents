@@ -144,24 +144,30 @@ const Hero = () => {
         </div>
 
         {/* Slide indicators with labels */}
-        <div className="flex justify-center gap-6 mt-10">
+        <div className="flex justify-center gap-8 mt-12">
           {slides.map((s, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
-              className={`flex flex-col items-center gap-2 transition-all duration-300 group ${
-                i === current ? "opacity-100" : "opacity-50 hover:opacity-80"
+              className={`flex flex-col items-center gap-2.5 transition-all duration-500 group cursor-pointer ${
+                i === current ? "opacity-100" : "opacity-40 hover:opacity-70"
               }`}
               aria-label={`Go to ${s.label}`}
             >
-              <span className={`text-xs font-medium tracking-wide uppercase ${
-                i === current ? "text-primary" : "text-muted-foreground"
+              <span className={`text-[11px] font-semibold tracking-widest uppercase transition-colors duration-500 ${
+                i === current ? "text-primary" : "text-muted-foreground group-hover:text-foreground/60"
               }`}>
                 {s.label}
               </span>
-              <div className={`h-1 rounded-full transition-all duration-300 ${
-                i === current ? "w-8 bg-primary" : "w-4 bg-muted-foreground/30 group-hover:bg-muted-foreground/60"
-              }`} />
+              <div className="relative h-0.5 w-12 rounded-full bg-muted-foreground/20 overflow-hidden">
+                {i === current && (
+                  <div
+                    className="absolute inset-y-0 left-0 bg-primary rounded-full animate-[progress_7s_linear]"
+                    key={current}
+                    style={{ width: '100%' }}
+                  />
+                )}
+              </div>
             </button>
           ))}
         </div>
