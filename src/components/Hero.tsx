@@ -51,20 +51,24 @@ const Hero = () => {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const [direction, setDirection] = useState<'up' | 'down'>('up');
+
   const goTo = useCallback(
     (index: number) => {
       if (isTransitioning || index === current) return;
+      setDirection(index > current ? 'up' : 'down');
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrent(index);
-        setTimeout(() => setIsTransitioning(false), 50);
-      }, 400);
+        setTimeout(() => setIsTransitioning(false), 80);
+      }, 500);
     },
     [isTransitioning, current]
   );
 
   useEffect(() => {
     const timer = setInterval(() => {
+      setDirection('up');
       goTo((current + 1) % slides.length);
     }, 7000);
     return () => clearInterval(timer);
@@ -75,6 +79,9 @@ const Hero = () => {
   const scrollToServices = () => {
     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const exitTransform = direction === 'up' ? '-translate-y-8' : 'translate-y-8';
+  const enterTransform = direction === 'up' ? 'translate-y-8' : '-translate-y-8';
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -91,9 +98,12 @@ const Hero = () => {
         </div>
 
         <div
-          className={`transition-all duration-400 ${
-            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          className={`transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            isTransitioning
+              ? `opacity-0 ${exitTransform} scale-[0.97] blur-sm`
+              : `opacity-100 translate-y-0 scale-100 blur-0`
           }`}
+          style={{ willChange: 'transform, opacity, filter' }}
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl mx-auto">
             {slide.headlinePart1}{" "}
@@ -134,24 +144,30 @@ const Hero = () => {
         </div>
 
         {/* Slide indicators with labels */}
-        <div className="flex justify-center gap-6 mt-10">
+        <div className="flex justify-center gap-8 mt-12">
           {slides.map((s, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
-              className={`flex flex-col items-center gap-2 transition-all duration-300 group ${
-                i === current ? "opacity-100" : "opacity-50 hover:opacity-80"
+              className={`flex flex-col items-center gap-2.5 transition-all duration-500 group cursor-pointer ${
+                i === current ? "opacity-100" : "opacity-40 hover:opacity-70"
               }`}
               aria-label={`Go to ${s.label}`}
             >
-              <span className={`text-xs font-medium tracking-wide uppercase ${
-                i === current ? "text-primary" : "text-muted-foreground"
+              <span className={`text-[11px] font-semibold tracking-widest uppercase transition-colors duration-500 ${
+                i === current ? "text-primary" : "text-muted-foreground group-hover:text-foreground/60"
               }`}>
                 {s.label}
               </span>
-              <div className={`h-1 rounded-full transition-all duration-300 ${
-                i === current ? "w-8 bg-primary" : "w-4 bg-muted-foreground/30 group-hover:bg-muted-foreground/60"
-              }`} />
+              <div className="relative h-0.5 w-12 rounded-full bg-muted-foreground/20 overflow-hidden">
+                {i === current && (
+                  <div
+                    className="absolute inset-y-0 left-0 bg-primary rounded-full animate-[progress_7s_linear]"
+                    key={current}
+                    style={{ width: '100%' }}
+                  />
+                )}
+              </div>
             </button>
           ))}
         </div>
