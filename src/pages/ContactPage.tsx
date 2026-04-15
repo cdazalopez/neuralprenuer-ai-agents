@@ -39,7 +39,7 @@ const ContactPage = () => {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch">
               {/* Contact Form */}
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full lg:min-h-[1100px]">
+              <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full lg:min-h-[800px]">
                 <CardHeader>
                   <CardTitle className="text-2xl bg-gradient-neural bg-clip-text text-transparent">Get In Touch</CardTitle>
                   <CardDescription>
@@ -49,7 +49,7 @@ const ContactPage = () => {
                 <CardContent className="flex-1">
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                    style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
+                    style={{ width: '100%', height: '100%', minHeight: '700px', border: 'none', borderRadius: '5px' }}
                     id="inline-7HpiXRMMtLQH0GtB4pEG"
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
@@ -59,7 +59,7 @@ const ContactPage = () => {
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
                     data-form-name="Free Consult"
-                    data-height="1100"
+                    data-height="undefined"
                     data-layout-iframe-id="inline-7HpiXRMMtLQH0GtB4pEG"
                     data-form-id="7HpiXRMMtLQH0GtB4pEG"
                     title="Free Consult"
@@ -68,7 +68,7 @@ const ContactPage = () => {
               </Card>
               
               {/* Contact Information */}
-              <div className="flex flex-col h-full lg:min-h-[1100px]">
+              <div className="flex flex-col h-full lg:min-h-[800px]">
                 {/* Main Info Card */}
                 <Card className="border-border/50 bg-gradient-to-br from-card via-card to-secondary/30 backdrop-blur-sm flex-1">
                   <CardContent className="p-8 flex flex-col h-full">
