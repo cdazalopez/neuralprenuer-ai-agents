@@ -51,20 +51,24 @@ const Hero = () => {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const [direction, setDirection] = useState<'up' | 'down'>('up');
+
   const goTo = useCallback(
     (index: number) => {
       if (isTransitioning || index === current) return;
+      setDirection(index > current ? 'up' : 'down');
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrent(index);
-        setTimeout(() => setIsTransitioning(false), 50);
-      }, 400);
+        setTimeout(() => setIsTransitioning(false), 80);
+      }, 500);
     },
     [isTransitioning, current]
   );
 
   useEffect(() => {
     const timer = setInterval(() => {
+      setDirection('up');
       goTo((current + 1) % slides.length);
     }, 7000);
     return () => clearInterval(timer);
@@ -75,6 +79,9 @@ const Hero = () => {
   const scrollToServices = () => {
     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const exitTransform = direction === 'up' ? '-translate-y-8' : 'translate-y-8';
+  const enterTransform = direction === 'up' ? 'translate-y-8' : '-translate-y-8';
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -91,9 +98,12 @@ const Hero = () => {
         </div>
 
         <div
-          className={`transition-all duration-400 ${
-            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          className={`transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            isTransitioning
+              ? `opacity-0 ${exitTransform} scale-[0.97] blur-sm`
+              : `opacity-100 translate-y-0 scale-100 blur-0`
           }`}
+          style={{ willChange: 'transform, opacity, filter' }}
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl mx-auto">
             {slide.headlinePart1}{" "}
