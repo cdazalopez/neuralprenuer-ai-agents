@@ -152,6 +152,7 @@ const Hero = () => {
               <div className={`h-1 rounded-full transition-all duration-300 ${
                 i === current ? "w-8 bg-primary" : "w-4 bg-muted-foreground/30 group-hover:bg-muted-foreground/60"
               }`} />
+            </button>
           ))}
         </div>
       </div>
