@@ -30,7 +30,7 @@ const Contact = () => {
             <CardContent>
               <iframe
                 src="https://api.leadconnectorhq.com/widget/form/7HpiXRMMtLQH0GtB4pEG"
-                style={{ width: '100%', height: '1100px', border: 'none', borderRadius: '5px', overflow: 'hidden' }}
+                style={{ width: '100%', height: '100%', border: 'none', borderRadius: '5px' }}
                 id="inline-7HpiXRMMtLQH0GtB4pEG"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
@@ -40,7 +40,7 @@ const Contact = () => {
                 data-deactivation-type="neverDeactivate"
                 data-deactivation-value=""
                 data-form-name="Free Consult"
-                data-height="1100"
+                data-height="undefined"
                 data-layout-iframe-id="inline-7HpiXRMMtLQH0GtB4pEG"
                 data-form-id="7HpiXRMMtLQH0GtB4pEG"
                 title="Free Consult"
