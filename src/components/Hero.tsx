@@ -7,6 +7,7 @@ import logo from "@/assets/neuralpreneur-logo.png";
 
 const slides = [
   {
+    label: "Home Services",
     headlinePart1: "Texas Home Service Pros:",
     headlineAccent: "Stop Losing $40,000 a Year",
     headlinePart2: "to Missed Calls.",
@@ -19,6 +20,7 @@ const slides = [
     ],
   },
   {
+    label: "Medical Practices",
     headlinePart1: "Your Front Desk Is Drowning.",
     headlineAccent: "Your Patients Are Hanging Up.",
     headlinePart2: "",
@@ -31,6 +33,7 @@ const slides = [
     ],
   },
   {
+    label: "Law Firms",
     headlinePart1: "The Lead You Paid $450 For",
     headlineAccent: "Is Calling Your Competitor Right Now.",
     headlinePart2: "",
@@ -130,19 +133,26 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-3 mt-10">
-          {slides.map((_, i) => (
+        {/* Slide indicators with labels */}
+        <div className="flex justify-center gap-6 mt-10">
+          {slides.map((s, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i === current
-                  ? "bg-primary scale-125"
-                  : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
+              className={`flex flex-col items-center gap-2 transition-all duration-300 group ${
+                i === current ? "opacity-100" : "opacity-50 hover:opacity-80"
               }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
+              aria-label={`Go to ${s.label}`}
+            >
+              <span className={`text-xs font-medium tracking-wide uppercase ${
+                i === current ? "text-primary" : "text-muted-foreground"
+              }`}>
+                {s.label}
+              </span>
+              <div className={`h-1 rounded-full transition-all duration-300 ${
+                i === current ? "w-8 bg-primary" : "w-4 bg-muted-foreground/30 group-hover:bg-muted-foreground/60"
+              }`} />
+            </button>
           ))}
         </div>
       </div>
