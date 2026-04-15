@@ -105,6 +105,13 @@ const Hero = () => {
           }`}
           style={{ willChange: 'transform, opacity, filter' }}
         >
+          <div className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm">
+            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-sm font-semibold tracking-widest uppercase text-primary">
+              {slide.label}
+            </span>
+          </div>
+
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl mx-auto">
             {slide.headlinePart1}{" "}
             <span className="bg-gradient-neural bg-clip-text text-transparent">
