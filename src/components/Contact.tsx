@@ -1,9 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { siteConfig } from "@/lib/seo-data";
 import { useLeadConnectorEmbed } from "@/hooks/use-leadconnector-embed";
 
 const Contact = () => {
+  const { t } = useTranslation();
   useLeadConnectorEmbed();
 
   return (
@@ -11,20 +12,19 @@ const Contact = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-neural bg-clip-text text-transparent">
-            Ready to Transform Your Business?
+            {t("contact.heading")}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Let's discuss how AI can revolutionize your operations. Schedule a free consultation today.
+            {t("contact.sub")}
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Form */}
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl">Get In Touch</CardTitle>
+              <CardTitle className="text-2xl">{t("contact.formTitle")}</CardTitle>
               <CardDescription>
-                Fill out the form below and we'll get back to you within 24 hours.
+                {t("contact.formDesc")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -47,8 +47,7 @@ const Contact = () => {
               />
             </CardContent>
           </Card>
-          
-          {/* Contact Information */}
+
           <div className="space-y-8">
             <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
@@ -57,13 +56,13 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-background" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Email</h3>
+                    <h3 className="font-semibold">{t("contact.email")}</h3>
                     <p className="text-muted-foreground">contact@neuralpreneur.com</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
@@ -71,13 +70,13 @@ const Contact = () => {
                     <Phone className="w-6 h-6 text-background" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Phone</h3>
+                    <h3 className="font-semibold">{t("contact.phone")}</h3>
                     <p className="text-muted-foreground">+1 936.202.9970</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
@@ -85,13 +84,13 @@ const Contact = () => {
                     <Clock className="w-6 h-6 text-background" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Business Hours</h3>
-                    <p className="text-muted-foreground">Mon - Fri: 9AM - 6PM EST</p>
+                    <h3 className="font-semibold">{t("contact.hours")}</h3>
+                    <p className="text-muted-foreground">{t("contact.hoursValue")}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
@@ -99,7 +98,7 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-background" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Location</h3>
+                    <h3 className="font-semibold">{t("contact.location")}</h3>
                     <p className="text-muted-foreground">Conroe, TX</p>
                   </div>
                 </div>
