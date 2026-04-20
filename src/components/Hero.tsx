@@ -1,53 +1,53 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Phone, MessageSquare, FileCheck, ShieldCheck, CalendarCheck, BellRing, Zap, Languages, Plug } from "lucide-react";
 import neuralHero from "@/assets/neural-hero.jpg";
 import logo from "@/assets/neuralpreneur-logo.png";
 
-const slides = [
-  {
-    label: "Home Services",
-    headlinePart1: "Texas Home Service Pros:",
-    headlineAccent: "Stop Losing $40,000 a Year",
-    headlinePart2: "to Missed Calls.",
-    subhead:
-      "We build AI receptionists and lead-response agents for HVAC, plumbing, roofing, and electrical companies — so every call gets answered, every lead gets followed up within 60 seconds, and your techs stay booked solid. Live in 14 days. Flat fee.",
-    bullets: [
-      { icon: Phone, text: "Answers 100% of after-hours calls" },
-      { icon: MessageSquare, text: "Books jobs into ServiceTitan, Jobber & Housecall Pro" },
-      { icon: FileCheck, text: "Follows up on every quote until it closes" },
-    ],
-  },
-  {
-    label: "Medical Practices",
-    headlinePart1: "Your Front Desk Is Drowning.",
-    headlineAccent: "Your Patients Are Hanging Up.",
-    headlinePart2: "",
-    subhead:
-      "We build HIPAA-conscious AI receptionists for private medical practices that answer every call, schedule appointments, handle refill and referral requests, and cut no-shows by 30% — so your staff can actually take care of the patients in front of them.",
-    bullets: [
-      { icon: ShieldCheck, text: "BAA-backed, HIPAA-conscious stack" },
-      { icon: CalendarCheck, text: "Integrates with your EHR scheduling" },
-      { icon: BellRing, text: "Cuts no-shows with smart reminders" },
-    ],
-  },
-  {
-    label: "Law Firms",
-    headlinePart1: "The Lead You Paid $450 For",
-    headlineAccent: "Is Calling Your Competitor Right Now.",
-    headlinePart2: "",
-    subhead:
-      "We build AI intake and lead-response systems for Texas law firms that respond to every lead in under 60 seconds, run structured intake, and book signed cases onto the calendar — so the leads you paid for actually become clients.",
-    bullets: [
-      { icon: Zap, text: "Responds in under 60 seconds, day or night" },
-      { icon: Languages, text: "Handles intake in English and Spanish" },
-      { icon: Plug, text: "Integrates with Clio, MyCase, Filevine, Lawmatics" },
-    ],
-  },
-];
-
 const Hero = () => {
+  const { t } = useTranslation();
+
+  const slides = [
+    {
+      label: t("hero.slides.home.label"),
+      headlinePart1: t("hero.slides.home.h1"),
+      headlineAccent: t("hero.slides.home.accent"),
+      headlinePart2: t("hero.slides.home.h2"),
+      subhead: t("hero.slides.home.sub"),
+      bullets: [
+        { icon: Phone, text: t("hero.slides.home.b1") },
+        { icon: MessageSquare, text: t("hero.slides.home.b2") },
+        { icon: FileCheck, text: t("hero.slides.home.b3") },
+      ],
+    },
+    {
+      label: t("hero.slides.medical.label"),
+      headlinePart1: t("hero.slides.medical.h1"),
+      headlineAccent: t("hero.slides.medical.accent"),
+      headlinePart2: t("hero.slides.medical.h2"),
+      subhead: t("hero.slides.medical.sub"),
+      bullets: [
+        { icon: ShieldCheck, text: t("hero.slides.medical.b1") },
+        { icon: CalendarCheck, text: t("hero.slides.medical.b2") },
+        { icon: BellRing, text: t("hero.slides.medical.b3") },
+      ],
+    },
+    {
+      label: t("hero.slides.legal.label"),
+      headlinePart1: t("hero.slides.legal.h1"),
+      headlineAccent: t("hero.slides.legal.accent"),
+      headlinePart2: t("hero.slides.legal.h2"),
+      subhead: t("hero.slides.legal.sub"),
+      bullets: [
+        { icon: Zap, text: t("hero.slides.legal.b1") },
+        { icon: Languages, text: t("hero.slides.legal.b2") },
+        { icon: Plug, text: t("hero.slides.legal.b3") },
+      ],
+    },
+  ];
+
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -128,12 +128,12 @@ const Hero = () => {
             <Link to="/booking">
               <Button variant="hero" className="group">
                 <Calendar className="w-5 h-5" />
-                Get My Free AI Opportunity Audit
+                {t("hero.cta")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Button variant="ghost" size="lg" onClick={scrollToServices}>
-              See How It Works
+              {t("hero.secondary")}
             </Button>
           </div>
 

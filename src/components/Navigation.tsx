@@ -1,25 +1,28 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, Calendar, Wrench, HeartPulse, Scale } from "lucide-react";
 import logo from "@/assets/neuralpreneur-logo.png";
-
-const industries = [
-  { label: "Home Services", href: "/", icon: Wrench },
-  { label: "Medical Practices", href: "/medical", icon: HeartPulse },
-  { label: "Law Firms", href: "/legal", icon: Scale },
-];
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Navigation = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const location = useLocation();
 
+  const industries = [
+    { label: t("nav.homeServices"), href: "/", icon: Wrench },
+    { label: t("nav.medical"), href: "/medical", icon: HeartPulse },
+    { label: t("nav.legal"), href: "/legal", icon: Scale },
+  ];
+
   const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Contact", href: "/contact" },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.faq"), href: "/faq" },
+    { label: t("nav.contact"), href: "/contact" },
   ];
 
   const isActive = (href: string) => {
@@ -41,7 +44,7 @@ const Navigation = () => {
               to="/"
               className={`transition-colors ${location.pathname === "/" ? "text-primary font-medium" : "text-muted-foreground hover:text-primary"}`}
             >
-              Home
+              {t("nav.home")}
             </Link>
 
             {/* Industries Dropdown */}
@@ -58,7 +61,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIndustriesOpen(!industriesOpen)}
               >
-                Industries
+                {t("nav.industries")}
                 <ChevronDown className={`w-4 h-4 transition-transform ${industriesOpen ? "rotate-180" : ""}`} />
               </button>
 
@@ -97,11 +100,12 @@ const Navigation = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             <Link to="/booking">
               <Button variant="neural" size="sm" className="gap-2">
                 <Calendar className="w-4 h-4" />
-                Book a Free Consultation
+                {t("nav.cta")}
               </Button>
             </Link>
           </div>
@@ -116,7 +120,7 @@ const Navigation = () => {
           <div className="md:hidden pt-4 pb-2 border-t border-border/50 mt-4">
             <div className="flex flex-col space-y-2">
               <Link to="/" onClick={() => setIsOpen(false)} className={`py-2 transition-colors ${location.pathname === "/" ? "text-primary font-medium" : "text-muted-foreground hover:text-primary"}`}>
-                Home
+                {t("nav.home")}
               </Link>
 
               <div>
@@ -124,7 +128,7 @@ const Navigation = () => {
                   onClick={() => setIndustriesOpen(!industriesOpen)}
                   className="w-full flex items-center justify-between py-2 text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Industries
+                  {t("nav.industries")}
                   <ChevronDown className={`w-4 h-4 transition-transform ${industriesOpen ? "rotate-180" : ""}`} />
                 </button>
                 {industriesOpen && (
@@ -154,10 +158,14 @@ const Navigation = () => {
                 </Link>
               ))}
 
+              <div className="pt-2">
+                <LanguageSwitcher />
+              </div>
+
               <Link to="/booking" onClick={() => setIsOpen(false)} className="w-full">
                 <Button variant="neural" className="w-full mt-2 gap-2">
                   <Calendar className="w-4 h-4" />
-                  Book a Free Consultation
+                  {t("nav.cta")}
                 </Button>
               </Link>
             </div>
