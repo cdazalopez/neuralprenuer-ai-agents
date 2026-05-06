@@ -17,6 +17,9 @@ import FAQPage from "./pages/FAQPage";
 import InternalAuditPage from "./pages/InternalAuditPage";
 import MedicalPage from "./pages/MedicalPage";
 import LegalPage from "./pages/LegalPage";
+import LegalPrivacyPage from "./pages/LegalPrivacyPage";
+import LegalSmsTermsPage from "./pages/LegalSmsTermsPage";
+import LegalSmsOptInPage from "./pages/LegalSmsOptInPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
