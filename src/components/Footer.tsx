@@ -75,6 +75,9 @@ const Footer = () => {
             <div className="flex items-center gap-4">
               <Link to="/privacy-policy" className="hover:text-primary transition-colors">{t("footer.privacy")}</Link>
               <Link to="/terms-of-service" className="hover:text-primary transition-colors">{t("footer.terms")}</Link>
+              <Link to="/legal/privacy" className="hover:text-primary transition-colors">SMS Privacy</Link>
+              <Link to="/legal/sms-terms" className="hover:text-primary transition-colors">SMS Terms</Link>
+              <Link to="/legal/sms-opt-in" className="hover:text-primary transition-colors">SMS Opt-In</Link>
               <Link to="/opt-in" className="hover:text-primary transition-colors">{t("footer.subscribe")}</Link>
             </div>
             <p className="italic">{siteConfig.tagline}</p>
