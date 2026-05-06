@@ -33,8 +33,11 @@ const LegalPrivacyPage = () => {
 
           <h2 className="text-2xl font-bold mt-10 mb-3">3. SMS Messaging — Mandatory Disclosure</h2>
           <div className="bg-primary/5 border-l-4 border-primary rounded-r-md p-5 my-6">
+            <p className="mb-3">
+              <strong>SMS Data Sharing.</strong> No mobile information collected through the NuroLegal SMS program — including your mobile phone number, opt-in status, and SMS conversation content — will be shared, sold, rented, or transferred to any third party or affiliate for marketing or promotional purposes. SMS opt-in data and consent are excluded from any other data-sharing categories described elsewhere in this policy. Information sharing with subcontractors strictly necessary to deliver the SMS service (such as our SMS carrier Twilio and the Partner Firm whose number you contacted) is permitted; those subcontractors are bound by confidentiality obligations and may not use the data for their own marketing.
+            </p>
             <p>
-              <strong>SMS Data Sharing.</strong> No mobile information collected through the NuroLegal SMS program — including your mobile phone number, opt-in status, and SMS conversation content — will not be shared, sold, rented, or transferred to any third party or affiliate for marketing or promotional purposes. SMS opt-in data and consent are excluded from any other data-sharing categories described elsewhere in this policy. Information sharing with subcontractors strictly necessary to deliver the SMS service (such as our SMS carrier Twilio and the Partner Firm whose number you contacted) is permitted; those subcontractors are bound by confidentiality obligations and may not use the data for their own marketing.
+              For clarity: mobile opt-in data and SMS consent will not be shared, sold, rented, or transferred to any third party or affiliate for marketing or promotional purposes.
             </p>
           </div>
 
