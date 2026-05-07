@@ -29,17 +29,17 @@ const InstagramLandingPage = () => {
   }, []);
 
   const benefits = [
-    { icon: Phone, title: "24/7 AI Voice Agents", desc: "Never miss a call. Capture every lead, day or night." },
-    { icon: MessageSquare, title: "Instant SMS Replies", desc: "Reply to leads in under 30 seconds — automatically." },
-    { icon: CalendarCheck, title: "Auto-Booked Appointments", desc: "AI handles scheduling so you stay focused on revenue." },
-    { icon: ShieldCheck, title: "HIPAA-Aware Workflows", desc: "Built for medical, legal, and regulated industries." },
+    { icon: Sparkles, title: "Custom AI Agents", desc: "Voice, chat, and SMS agents built around your workflows." },
+    { icon: Zap, title: "Process Automation", desc: "Automate repetitive tasks across your tools and team." },
+    { icon: CalendarCheck, title: "Smart Scheduling & CRM", desc: "AI that books, follows up, and keeps your pipeline moving." },
+    { icon: ShieldCheck, title: "Strategy & Training", desc: "AI roadmaps and team training built for real adoption." },
   ];
 
   const outcomes = [
-    "Stop losing leads to voicemail",
-    "Cut response time from hours to seconds",
-    "Free up 15+ hours per week",
-    "Convert more bookings on autopilot",
+    "Save 15+ hours per week on busywork",
+    "Capture and convert more leads",
+    "Make smarter decisions with data",
+    "Scale operations without scaling headcount",
   ];
 
   const steps = [
@@ -76,16 +76,16 @@ const InstagramLandingPage = () => {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-3xl mx-auto mb-6">
-              Turn Missed Calls Into{" "}
+              Custom AI That{" "}
               <span className="bg-gradient-neural bg-clip-text text-transparent">
-                Booked Revenue
+                Grows Your Business
               </span>{" "}
-              with AI
+              On Autopilot
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              We build AI voice agents, SMS bots, and scheduling automations that work
-              24/7 — so you stop losing leads and start winning back your time.
+              From voice agents and chatbots to workflow automation, predictive analytics,
+              and team training — we design AI solutions tailored to your business goals.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
@@ -119,10 +119,10 @@ const InstagramLandingPage = () => {
                 What You Get
               </p>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                AI that answers, replies, and books — for you
+                AI solutions tailored to how you work
               </h2>
               <p className="text-muted-foreground">
-                Everything your business needs to capture and convert leads on autopilot.
+                We design, build, and deploy AI that fits your business — not the other way around.
               </p>
             </div>
 
