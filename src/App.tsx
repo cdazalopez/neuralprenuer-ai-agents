@@ -20,6 +20,7 @@ import LegalPage from "./pages/LegalPage";
 import LegalPrivacyPage from "./pages/LegalPrivacyPage";
 import LegalSmsTermsPage from "./pages/LegalSmsTermsPage";
 import LegalSmsOptInPage from "./pages/LegalSmsOptInPage";
+import InstagramLandingPage from "./pages/InstagramLandingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
