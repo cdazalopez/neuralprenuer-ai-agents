@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,15 @@ const InstagramLandingPage = () => {
                 <Clock className="w-4 h-4 text-accent" />
                 30 min · Zero pressure · Microsoft Teams
               </div>
+            </div>
+
+            <div className="flex justify-center">
+              <Link
+                to="/"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
+              >
+                Visit our full website
+              </Link>
             </div>
 
             <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
