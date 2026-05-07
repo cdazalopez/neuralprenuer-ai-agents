@@ -20,6 +20,7 @@ import LegalPage from "./pages/LegalPage";
 import LegalPrivacyPage from "./pages/LegalPrivacyPage";
 import LegalSmsTermsPage from "./pages/LegalSmsTermsPage";
 import LegalSmsOptInPage from "./pages/LegalSmsOptInPage";
+import InstagramLandingPage from "./pages/InstagramLandingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,8 @@ const App = () => (
           <Route path="/legal/sms-terms" element={<LegalSmsTermsPage />} />
           <Route path="/legal/sms-opt-in" element={<LegalSmsOptInPage />} />
           <Route path="/internal-audit" element={<InternalAuditPage />} />
+          <Route path="/start" element={<InstagramLandingPage />} />
+          <Route path="/ig" element={<InstagramLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
