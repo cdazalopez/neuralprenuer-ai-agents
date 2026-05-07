@@ -100,6 +100,15 @@ const InstagramLandingPage = () => {
               </div>
             </div>
 
+            <div className="flex justify-center">
+              <Link
+                to="/"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
+              >
+                Visit our full website
+              </Link>
+            </div>
+
             <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-1.5">
                 {[...Array(5)].map((_, i) => (
