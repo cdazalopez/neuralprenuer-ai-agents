@@ -14,6 +14,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   "/ig",
   "/internal-audit",
   "/legal/sms-opt-in",
+  "/services",
 ]);
 
 const CHAT_WIDGET_SELECTORS = [
@@ -36,10 +37,17 @@ const removeWidget = () => {
   document.querySelectorAll(CHAT_WIDGET_SELECTORS).forEach((el) => el.remove());
 };
 
+const isExcludedRoute = (pathname: string): boolean => {
+  const normalized = pathname.replace(/\/+$/, "") || "/";
+  if (EXCLUDED_ROUTES.has(normalized)) return true;
+  // Exclude all service detail pages (e.g., /services/ai-receptionist)
+  if (normalized.startsWith("/services/")) return true;
+  return false;
+};
+
 const ChatWidget = () => {
   const { pathname } = useLocation();
-  const normalizedPath = pathname.replace(/\/+$/, "") || "/";
-  const excluded = EXCLUDED_ROUTES.has(normalizedPath);
+  const excluded = isExcludedRoute(pathname);
 
   useEffect(() => {
     if (excluded) {
