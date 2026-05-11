@@ -22,7 +22,7 @@ import LegalSmsTermsPage from "./pages/LegalSmsTermsPage";
 import LegalSmsOptInPage from "./pages/LegalSmsOptInPage";
 import InstagramLandingPage from "./pages/InstagramLandingPage";
 import NotFound from "./pages/NotFound";
-import ChatWidget from "./components/ChatWidget";
+// ChatWidget removed — site no longer loads the LeadConnector chat widget on any page.
 
 const queryClient = new QueryClient();
 
