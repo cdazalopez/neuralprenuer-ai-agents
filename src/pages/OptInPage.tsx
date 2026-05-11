@@ -51,6 +51,7 @@ const OptInPage = () => {
         p_first_name: data.firstName.trim(),
         p_last_name: data.lastName.trim(),
         p_email: data.email.trim().toLowerCase(),
+        p_phone: null,
         p_marketing_consent: data.marketingConsent,
         p_privacy_policy_accepted: data.privacyPolicyAccepted,
         p_terms_accepted: data.termsAccepted,
