@@ -4,18 +4,8 @@ import { useLocation } from "react-router-dom";
 const SCRIPT_SRC = "https://widgets.leadconnectorhq.com/loader.js";
 const WIDGET_ID = "6a01f8e9218c3a024e5f5d9c";
 
-// Routes that already have a contact / lead form — skip the chat widget here.
-const EXCLUDED_ROUTES = new Set<string>([
-  "/",
-  "/contact",
-  "/booking",
-  "/opt-in",
-  "/start",
-  "/ig",
-  "/internal-audit",
-  "/legal/sms-opt-in",
-  "/services",
-]);
+// Show chat widget on all routes.
+const EXCLUDED_ROUTES = new Set<string>([]);
 
 const CHAT_WIDGET_SELECTORS = [
   `script[data-widget-id="${WIDGET_ID}"]`,
