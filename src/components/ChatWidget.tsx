@@ -20,10 +20,14 @@ const EXCLUDED_ROUTES = new Set<string>([
 const CHAT_WIDGET_SELECTORS = [
   `script[data-widget-id="${WIDGET_ID}"]`,
   `script[src="${SCRIPT_SRC}"]`,
-  "script[src*='widgets.leadconnectorhq.com'][data-widget-id]",
+  "script[src*='widgets.leadconnectorhq.com']",
+  "script[src*='leadconnectorhq']",
   "iframe[src*='chat-widget']",
   "iframe[src*='widgets.leadconnectorhq.com']",
+  "iframe[src*='leadconnectorhq']",
+  "iframe[id*='chat']",
   "lc-chat-widget",
+  "chat-widget",
   "#lc-chat-widget",
   "[id*='lc-chat-widget']",
   "[class*='lc-chat-widget']",
@@ -31,6 +35,8 @@ const CHAT_WIDGET_SELECTORS = [
   "[class*='leadconnector-chat']",
   "[id*='chat-widget']",
   "[class*='chat-widget']",
+  "[class*='ChatWidget']",
+  "[class*='LeadConnector']",
 ].join(",");
 
 const HIDE_STYLE_ID = "lc-chat-widget-hide-style";
