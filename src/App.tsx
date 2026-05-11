@@ -32,7 +32,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ChatWidget />
+        {/* ChatWidget removed */}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<ServicesPage />} />
