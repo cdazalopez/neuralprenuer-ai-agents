@@ -33,6 +33,29 @@ const CHAT_WIDGET_SELECTORS = [
   "[class*='chat-widget']",
 ].join(",");
 
+const HIDE_STYLE_ID = "lc-chat-widget-hide-style";
+
+const HIDE_CSS = `
+  ${CHAT_WIDGET_SELECTORS} {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+`;
+
+const installHideStyle = () => {
+  if (document.getElementById(HIDE_STYLE_ID)) return;
+  const style = document.createElement("style");
+  style.id = HIDE_STYLE_ID;
+  style.textContent = HIDE_CSS;
+  document.head.appendChild(style);
+};
+
+const removeHideStyle = () => {
+  document.getElementById(HIDE_STYLE_ID)?.remove();
+};
+
 const removeWidget = () => {
   document.querySelectorAll(CHAT_WIDGET_SELECTORS).forEach((el) => el.remove());
 };
@@ -51,9 +74,10 @@ const ChatWidget = () => {
 
   useEffect(() => {
     if (excluded) {
+      installHideStyle();
       removeWidget();
       const observer = new MutationObserver(removeWidget);
-      observer.observe(document.body, { childList: true, subtree: true });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
       const cleanupTimer = window.setInterval(removeWidget, 500);
 
       return () => {
@@ -61,6 +85,8 @@ const ChatWidget = () => {
         window.clearInterval(cleanupTimer);
       };
     }
+
+    removeHideStyle();
 
     if (document.querySelector(`script[data-widget-id="${WIDGET_ID}"]`)) return;
 
