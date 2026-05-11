@@ -56,11 +56,7 @@ const removeWidget = () => {
   document.querySelectorAll(CHAT_WIDGET_SELECTORS).forEach((el) => el.remove());
 };
 
-const isExcludedRoute = (pathname: string): boolean => {
-  const normalized = pathname.replace(/\/+$/, "") || "/";
-  if (EXCLUDED_ROUTES.has(normalized)) return true;
-  // Exclude all service detail pages (e.g., /services/ai-receptionist)
-  if (normalized.startsWith("/services/")) return true;
+const isExcludedRoute = (_pathname: string): boolean => {
   return false;
 };
 
