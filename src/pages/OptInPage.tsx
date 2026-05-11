@@ -17,7 +17,7 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phone?: string;
   marketingConsent: boolean;
   privacyPolicyAccepted: boolean;
   termsAccepted: boolean;
@@ -51,7 +51,7 @@ const OptInPage = () => {
         p_first_name: data.firstName.trim(),
         p_last_name: data.lastName.trim(),
         p_email: data.email.trim().toLowerCase(),
-        p_phone: data.phone?.trim() || null,
+        p_phone: null,
         p_marketing_consent: data.marketingConsent,
         p_privacy_policy_accepted: data.privacyPolicyAccepted,
         p_terms_accepted: data.termsAccepted,
@@ -222,17 +222,6 @@ const OptInPage = () => {
                     {errors.email && (
                       <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
                     )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="+1 (555) 123-4567" 
-                      className="mt-2" 
-                      {...register("phone")}
-                    />
                   </div>
 
                   {/* Consent Checkboxes */}
