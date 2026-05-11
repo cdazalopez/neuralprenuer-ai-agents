@@ -22,6 +22,7 @@ import LegalSmsTermsPage from "./pages/LegalSmsTermsPage";
 import LegalSmsOptInPage from "./pages/LegalSmsOptInPage";
 import InstagramLandingPage from "./pages/InstagramLandingPage";
 import NotFound from "./pages/NotFound";
+import ChatWidget from "./components/ChatWidget";
 
 const queryClient = new QueryClient();
 
