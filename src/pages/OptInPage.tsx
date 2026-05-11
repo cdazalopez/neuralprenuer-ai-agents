@@ -224,17 +224,6 @@ const OptInPage = () => {
                     )}
                   </div>
 
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="+1 (555) 123-4567" 
-                      className="mt-2" 
-                      {...register("phone")}
-                    />
-                  </div>
-
                   {/* Consent Checkboxes */}
                   <div className="space-y-4 border-t border-border pt-4">
                     <div className="flex items-start space-x-3">
