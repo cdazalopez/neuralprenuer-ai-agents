@@ -17,7 +17,7 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phone?: string;
   marketingConsent: boolean;
   privacyPolicyAccepted: boolean;
   termsAccepted: boolean;
