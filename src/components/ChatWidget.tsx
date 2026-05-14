@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const SCRIPT_SRC = "https://widgets.leadconnectorhq.com/loader.js";
-const WIDGET_ID = "6a01f8e9218c3a024e5f5d9c";
+const WIDGET_ID = "6a053cf40d644429a7869a8e";
 
 // Show chat widget on all routes.
 const EXCLUDED_ROUTES = new Set<string>([]);
